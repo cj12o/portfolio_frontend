@@ -5,21 +5,10 @@ import Image from "next/image";
 import Link from "next/link";
 import { motion, useMotionValueEvent, useScroll } from "framer-motion";
 
+import { NAV_ITEMS } from "@/data";
+
 const index = () => {
-  const items = [
-    {
-      name: "About",
-      href: "/about",
-    },
-    {
-      name: "Projects",
-      href: "/projects",
-    },
-    {
-      name: "Contact",
-      href: "/contact",
-    },
-  ];
+  const items = NAV_ITEMS;
   const [hover, setHover] = useState<number | null>(-1);
   const { scrollY } = useScroll();
 
@@ -36,7 +25,7 @@ const index = () => {
   return (
     <Container>
       <motion.nav
-        className="fixed top-0 inset-x-0 z-10 flex max-w-4xl mx-auto items-center justify-between p-2 bg-white rounded-l-full rounded-r-full"
+        className="fixed top-0 inset-x-0 z-0 flex max-w-4xl mx-auto items-center justify-between p-2 bg-white rounded-l-full rounded-r-full"
         animate={{
           boxShadow: scrolled ? "var(--shadow-s1)" : "none",
           maxWidth: scrolled ? "50%" : "70%",

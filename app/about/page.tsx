@@ -1,105 +1,120 @@
+"use client";
 import Container from "@/components/container";
+import { motion } from "framer-motion";
+
+import { SKILLS, EXPERIENCE } from "@/data";
 
 export default function About() {
-  const skills = [
-    "React & Next.js",
-    "TypeScript",
-    "Node.js",
-    "Python & Django",
-    "PostgreSQL & MongoDB",
-    "REST APIs & GraphQL",
-  ];
-
-  const experience = [
-    {
-      period: "2023 - Present",
-      role: "Full Stack Developer",
-      company: "Freelance",
-      description: "Building scalable web applications for clients worldwide.",
-    },
-    {
-      period: "2022 - 2023",
-      role: "Software Engineer Intern",
-      company: "Tech Startup",
-      description:
-        "Developed features for a SaaS platform using React and Node.js.",
-    },
-  ];
+  const skills = SKILLS;
+  const experience = EXPERIENCE;
 
   return (
-    <div className="min-h-screen flex items-start justify-start">
-      <Container classname="min-h-screen md:pt-20 md:pb-10">
-        {/* Header */}
-        <h1 className="text-2xl md:text-4xl font-bold tracking-tight text-primary">
-          About Me
-        </h1>
-        <p className="text-secondary text-sm md:text-base pt-4 max-w-2xl leading-relaxed">
-          I'm a passionate software engineer who loves turning ideas into
-          reality through code. With a strong foundation in full-stack
-          development, I focus on creating efficient, scalable solutions that
-          make a real impact.
-        </p>
+    <div className="min-h-screen flex items-start justify-start bg-grid-pattern bg-fixed">
+      <Container classname="min-h-screen md:pt-20 md:pb-10 bg-transparent">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+        >
+          {/* Header */}
+          <h1 className="text-2xl md:text-4xl font-bold tracking-tight text-primary">
+            About Me
+          </h1>
+          <p className="text-secondary text-sm md:text-base pt-4 max-w-2xl leading-relaxed">
+            I'm a passionate software engineer who loves turning ideas into
+            reality through code. With a strong foundation in full-stack
+            development, I focus on creating efficient, scalable solutions that
+            make a real impact.
+          </p>
+        </motion.div>
 
         {/* Skills Section */}
-        <div className="mt-12">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.2 }}
+          className="mt-12"
+        >
           <h2 className="text-xl md:text-2xl font-semibold text-primary mb-6">
             Skills & Technologies
           </h2>
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
+          <div className="flex flex-wrap gap-3">
             {skills.map((skill, idx) => (
-              <div
+              <motion.div
                 key={idx}
-                className="px-4 py-3 bg-neutral-50 border border-neutral-200 rounded-lg text-sm text-primary font-medium hover:border-neutral-300 transition-colors"
+                whileHover={{ scale: 1.05 }}
+                className="px-4 py-2 bg-white border border-neutral-200 rounded-full text-sm text-primary font-medium hover:border-neutral-300 hover:shadow-sm transition-all cursor-default"
               >
                 {skill}
-              </div>
+              </motion.div>
             ))}
           </div>
-        </div>
+        </motion.div>
 
         {/* Experience Section */}
-        <div className="mt-12">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.4 }}
+          className="mt-12"
+        >
           <h2 className="text-xl md:text-2xl font-semibold text-primary mb-6">
             Experience
           </h2>
-          <div className="space-y-6">
+          <div className="space-y-8">
             {experience.map((exp, idx) => (
               <div
                 key={idx}
-                className="border-l-2 border-neutral-300 pl-6 pb-6 last:pb-0"
+                className="relative pl-8 border-l border-neutral-200 before:content-[''] before:absolute before:left-[-5px] before:top-2 before:h-2.5 before:w-2.5 before:rounded-full before:bg-neutral-300 hover:before:bg-neutral-800 before:transition-colors"
               >
-                <p className="text-xs text-secondary mb-1">{exp.period}</p>
-                <h3 className="text-lg font-semibold text-primary">
+                <span className="text-xs font-mono text-neutral-500 uppercase tracking-wider">
+                  {exp.period}
+                </span>
+                <h3 className="text-lg font-semibold text-primary mt-1">
                   {exp.role}
                 </h3>
-                <p className="text-sm text-secondary mb-2">{exp.company}</p>
-                <p className="text-sm text-secondary leading-relaxed">
+                <p className="text-sm font-medium text-neutral-600 mb-2">
+                  {exp.company}
+                </p>
+                <p className="text-sm text-secondary leading-relaxed max-w-xl">
                   {exp.description}
                 </p>
               </div>
             ))}
           </div>
-        </div>
+        </motion.div>
 
         {/* Education Section */}
-        <div className="mt-12">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.6 }}
+          className="mt-12"
+        >
           <h2 className="text-xl md:text-2xl font-semibold text-primary mb-6">
             Education
           </h2>
-          <div className="border-l-2 border-neutral-300 pl-6">
-            <p className="text-xs text-secondary mb-1">2020 - 2024</p>
-            <h3 className="text-lg font-semibold text-primary">
+          <div className="pl-8 border-l border-neutral-200 relative before:content-[''] before:absolute before:left-[-5px] before:top-2 before:h-2.5 before:w-2.5 before:rounded-full before:bg-neutral-300">
+            <span className="text-xs font-mono text-neutral-500 uppercase tracking-wider">
+              2020 - 2024
+            </span>
+            <h3 className="text-lg font-semibold text-primary mt-1">
               Bachelor of Technology
             </h3>
-            <p className="text-sm text-secondary mb-2">Computer Science</p>
+            <p className="text-sm text-neutral-600 mb-2">Computer Science</p>
             <p className="text-sm text-secondary">
               Focused on software engineering, algorithms, and web development.
             </p>
           </div>
-        </div>
+        </motion.div>
 
         {/* Personal Interests */}
-        <div className="mt-12">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.8 }}
+          className="mt-12"
+        >
           <h2 className="text-xl md:text-2xl font-semibold text-primary mb-4">
             Beyond Code
           </h2>
@@ -109,7 +124,7 @@ export default function About() {
             enjoying a good game of football. I believe in continuous learning
             and staying curious about the ever-evolving tech landscape.
           </p>
-        </div>
+        </motion.div>
       </Container>
     </div>
   );

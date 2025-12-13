@@ -2,25 +2,10 @@
 import Container from "@/components/container";
 import { motion } from "framer-motion";
 
+import { SOCIAL_LINKS } from "@/data";
+
 export default function Contact() {
-  const socialLinks = [
-    {
-      name: "Email",
-      value: "chitransh@example.com",
-      href: "mailto:chitransh@example.com",
-    },
-    { name: "Twitter", value: "@chitransh", href: "https://twitter.com" },
-    {
-      name: "GitHub",
-      value: "github.com/chitransh",
-      href: "https://github.com",
-    },
-    {
-      name: "LinkedIn",
-      value: "linkedin.com/in/chitransh",
-      href: "https://linkedin.com",
-    },
-  ];
+  const socialLinks = SOCIAL_LINKS;
 
   return (
     <div className="min-h-screen flex items-start justify-start">
