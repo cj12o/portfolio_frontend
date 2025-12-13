@@ -1,73 +1,83 @@
 "use client";
-import Container from '@/components/container'
-import { useState } from 'react'
-import Image from 'next/image'
-import Link from 'next/link'
+import Container from "@/components/container";
+import { useState } from "react";
+import Image from "next/image";
+import Link from "next/link";
 import { motion, useMotionValueEvent, useScroll } from "framer-motion";
 
-
 const index = () => {
-  const items=[
+  const items = [
     {
-      name:"About",
-      href:"/about"      
+      name: "About",
+      href: "/about",
     },
     {
-      name:"Projects",
-      href:"/projects"
+      name: "Projects",
+      href: "/projects",
     },
     {
-      name:"Contact",
-      href:"/contact"
-    }
-  ]
-  const [hover,setHover]=useState<number|null>(-1);
-  const {scrollY}=useScroll();
+      name: "Contact",
+      href: "/contact",
+    },
+  ];
+  const [hover, setHover] = useState<number | null>(-1);
+  const { scrollY } = useScroll();
 
-  const [scrolled,setScrolled]=useState<boolean>(false)
+  const [scrolled, setScrolled] = useState<boolean>(false);
 
-  useMotionValueEvent(scrollY,"change",(latest)=>{
+  useMotionValueEvent(scrollY, "change", (latest) => {
     // console.log("Scroll",latest)
-    if(latest>20){
-      setScrolled(true)
-    }else{
-      setScrolled(false)
+    if (latest > 20) {
+      setScrolled(true);
+    } else {
+      setScrolled(false);
     }
-  })
+  });
   return (
     <Container>
-        <motion.nav className='fixed top-0 inset-x-0 z-10 flex max-w-4xl mx-auto items-center justify-between p-2 bg-white rounded-l-full rounded-r-full'
+      <motion.nav
+        className="fixed top-0 inset-x-0 z-10 flex max-w-4xl mx-auto items-center justify-between p-2 bg-white rounded-l-full rounded-r-full"
         animate={{
-          boxShadow: scrolled ? "var(--shadow-s1)":"none",
-          maxWidth:scrolled?"50%":"70%",
-          y:scrolled?10:0,
+          boxShadow: scrolled ? "var(--shadow-s1)" : "none",
+          maxWidth: scrolled ? "50%" : "70%",
+          y: scrolled ? 10 : 0,
         }}
         transition={{
-          duration:0.3,
-          ease:"linear"
+          duration: 0.3,
+          ease: "linear",
         }}
-        >
-
-          <Image className="h-10 w-10 rounded-full" src="/neymar.jpg" height={100} width={100} alt="neymar"/>
-          <div className='flex items-center gap-3'>
-            {
-            items.map((item,idx)=>{
-              return <Link 
-              className="relative text-sm px-2 py-1"
-              onMouseEnter={()=>setHover(idx)}
-              onMouseLeave={()=>setHover(-1)}
-              href={item.href} key={idx}>
-                {
-                  hover==idx?<motion.span layoutId="hovered-span" className='h-full w-full absolute inset-0 rounded-md bg-neutral-300'/>:null
-                }
-                <span className='relative z-10'>{item.name}</span>
+      >
+        <Image
+          className="h-10 w-10 rounded-full"
+          src="/neymar.jpg"
+          height={100}
+          width={100}
+          alt="neymar"
+        />
+        <div className="flex items-center gap-3">
+          {items.map((item, idx) => {
+            return (
+              <Link
+                className="relative text-sm px-2 py-1"
+                onMouseEnter={() => setHover(idx)}
+                onMouseLeave={() => setHover(-1)}
+                href={item.href}
+                key={idx}
+              >
+                {hover == idx ? (
+                  <motion.span
+                    layoutId="hovered-span"
+                    className="h-full w-full absolute inset-0 rounded-md bg-neutral-300"
+                  />
+                ) : null}
+                <span className="relative z-10">{item.name}</span>
               </Link>
-            })
-          }
-          </div>
-        </motion.nav>
+            );
+          })}
+        </div>
+      </motion.nav>
     </Container>
-  )
-}
+  );
+};
 
-export default index
+export default index;
