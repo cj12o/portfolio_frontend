@@ -1,52 +1,61 @@
 "use client";
-import Container from "@/components/container";
-import { div } from "framer-motion/client";
-import { FolderIcon,FileIcon } from "lucide-react";
-
-const projects_items=[
-  {
-    name:"prj1"
-  },
-  {
-    name:"prj2"
-  }
-]
-
-const prj1_detail={
-  title:"Agentic Chatrooms ",
-  description:"Education is the cornerstone of personal and societal development. It empowers individuals with knowledge, critical thinking skills, and the ability to make amplified the role of education, making lifelong learning essential to adapt to rapid changes. Moreover, education supports innovation and critical analysis, which are vital for solving complex global challenges such as climate change, poverty, and public health crises. Investing in quality education goes beyond individual growth—it strengthens society and sustains economic development. Therefore, governments, communities, and individuals must recognize and prioritize education as a fundamental human right and a driving force for progress in the 21st century.",
-  challenges_sol:[{
-    challenge:"Education is the cornerstone of personal and societal development. It empowers individuals with knowledge.",
-    solution:"Education is the cornerstone of personal and societal development. It empowers individuals with knowledge."
-  },
-  {
-    challenge:"Education is the cornerstone of personal and societal development. It empowers individuals with knowledge.",
-    solution:"Education is the cornerstone of personal and societal development. It empowers individuals with knowledge."
-  }]
-}
-
-
-export default function Projects() {
+import React, { useState } from 'react'
+import Container from '@/components/container'
+import { ChevronRight } from 'lucide-react';
+import { FolderIcon } from 'lucide-react';
+import {projectsData} from "@/data/project-data"
+import {motion} from "framer-motion"
+const page = () => {
+    const [sidebarOpen,setSidebarOpen]=useState<boolean>(false)
+    const [projectIdOpen,setProjectIdOpen]=useState<string>("-1")
 
   return (
-    <Container classname="flex border-2 border-black">
-      <div className="w-1/4 h-full bg-red-500 p-3">
-        <div className="grid grid-cols" key="left-div">
-          EXPLORER
-          {
-            projects_items.map((prj,idx)=>{
-              return <div className="flex p-2">
-                <FolderIcon key={prj.name}/>
-                <h2 className="ml-3">{prj.name}</h2>
-              </div>
-            })
-          }
+    <div className='mx-auto w-full bg-white grid grid-cols border-gray-300 border-2 max-w-6xl h-[80vh] rounded-xl overflow-hidden'>
+        {/* {header} */}
+        <div className='flex h-[5vh]'>
+            {/* {header.left} */}
+            <div className={!sidebarOpen?`w-[3vw] border border-gray-300`:`w-1/3 border border-gray-300`}>
+                <ChevronRight onClick={()=>{
+                    setSidebarOpen((prev)=>!prev)
+                }}/>
+            </div>
+            {/* {header.right} */}
+            <div className='border border-gray-300 w-full'>
+                cbiweucw
+            </div>   
         </div>
-      </div>
-      <div className="w-3/4 h-full bg-green-500 p-2" key="right-div">
-        <h1 className="p-2 font-bold text-4xl text-primary">{prj1_detail.title}</h1>
-        <p>{prj1_detail.description}</p>
-      </div>
-    </Container>
-  );
+        {/* {content-area} */}
+        <div className='flex h-[75vh]'>
+            {/* {left-sidebar} */}
+            <div className={!sidebarOpen?`w-[3vw] border border-gray-300`:`w-1/3 border border-gray-300`}>
+            {
+                sidebarOpen?(
+                    projectsData.map((prj,idx)=>{
+                        return <motion.div 
+                        whileHover={{ scale: 1.05, boxShadow:"shadow-md"}}
+                        className='flex items-center' 
+                        transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                        key={prj.id}>
+                        <FolderIcon
+                        className={`w-3.5 h-3.5 ${
+                            projectIdOpen===prj.id? "text-blue-400" : "text-blue-300"
+                        }`}
+                        fill="currentColor
+                        "/>
+                        <span className='ml-2'>{prj.title}</span>
+                        </motion.div>
+
+                    })
+                ):null
+            }
+            </div>
+            {/* {right-area} */}
+            <div className='border border-gray-300 w-full'>
+                ijrfbr
+            </div>
+        </div>
+    </div>
+  )
 }
+
+export default page
