@@ -1,6 +1,11 @@
 @import "tailwindcss";
 
 @theme inline {
+  /* Custom box shadow for inputs */
+  --shadow-s1:
+    0px 2px 5px -1px rgba(0, 0, 0, 0.1), 0px 1px 0px 0px rgba(25, 28, 33, 0.02),
+    0px 0px 0px 1px rgba(25, 28, 33, 0.08);
+
   --color-primary: var(--color-neutral-800);
   --color-secondary: var(--color-neutral-600);
 }

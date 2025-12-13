@@ -3,7 +3,7 @@ import Container from '@/components/container'
 import { useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
-import { motion } from "framer-motion";
+import { motion, useMotionValueEvent, useScroll } from "framer-motion";
 
 
 const index = () => {
@@ -22,9 +22,32 @@ const index = () => {
     }
   ]
   const [hover,setHover]=useState<number|null>(-1);
+  const {scrollY}=useScroll();
+
+  const [scrolled,setScrolled]=useState<boolean>(false)
+
+  useMotionValueEvent(scrollY,"change",(latest)=>{
+    // console.log("Scroll",latest)
+    if(latest>20){
+      setScrolled(true)
+    }else{
+      setScrolled(false)
+    }
+  })
   return (
     <Container>
-        <nav className='flex items-center justify-between'>
+        <motion.nav className='fixed top-0 inset-x-0 z-10 flex max-w-4xl mx-auto items-center justify-between p-2 bg-white rounded-l-full rounded-r-full'
+        animate={{
+          boxShadow: scrolled ? "var(--shadow-s1)":"none",
+          maxWidth:scrolled?"50%":"70%",
+          y:scrolled?10:0,
+        }}
+        transition={{
+          duration:0.3,
+          ease:"linear"
+        }}
+        >
+
           <Image className="h-10 w-10 rounded-full" src="/neymar.jpg" height={100} width={100} alt="neymar"/>
           <div className='flex items-center gap-3'>
             {
@@ -42,7 +65,7 @@ const index = () => {
             })
           }
           </div>
-        </nav>
+        </motion.nav>
     </Container>
   )
 }
