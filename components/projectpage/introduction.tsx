@@ -1,22 +1,21 @@
-import React from 'react'
-import {projectsData} from "@/data/project-data"
+"use client";
+import React from "react";
+import { projectsData } from "@/data/project-data";
 
-const introduction = ({project_id}:{project_id:string}) => {
-    const prj=projectsData[Number(project_id)]
-   return (
-    <div>
-        <h1>{prj.title}</h1>
-        <p>{prj.description}</p>
-        <video
-          src={prj.videoUrl}
-          controls
-          autoPlay
-          loop
-          muted
-          className="w-full h-full object-cover"
-        />
+const introduction = ({ project_id }: { project_id: string }) => {
+  const prj = projectsData[Number(project_id)];
+  return (
+    <div className="space-y-6">
+      <div>
+        <h1 className="text-2xl font-semibold text-foreground mb-2">
+          {prj.title}
+        </h1>
+        <p className="text-muted-foreground leading-relaxed">
+          {prj.description}
+        </p>
+      </div>
     </div>
-  )
-}
+  );
+};
 
-export default introduction
+export default introduction;

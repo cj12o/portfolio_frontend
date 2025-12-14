@@ -11,6 +11,10 @@ export const NAV_ITEMS = [
     name: "Contact",
     href: "/contact",
   },
+  {
+    name: "Blog",
+    href: "/blog",
+  }
 ];
 
 export const SKILLS = [
@@ -38,7 +42,7 @@ export const EXPERIENCE = [
   },
 ];
 
-export const PROJECTS = [
+export const projects = [
   {
     title: "E-Commerce Platform",
     description:

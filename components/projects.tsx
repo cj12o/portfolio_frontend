@@ -2,68 +2,52 @@
 import React from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { PROJECTS } from "@/data";
+import { projects as projects_data } from "@/data";
+import { useState } from "react";
 
 const projects = () => {
-  // Use first 2 projects for the home page or all of them
-  const displayedProjects = PROJECTS.slice(0, 4);
+  const [selected, setSelected] = useState<string | null>(null);
 
+  const Selected_OPACITY=1;
+  const Unselected_OPACITY=0.4;
+  
   return (
     <div className="py-10">
-      <div className="flex items-center justify-between mb-8">
-        <h2 className="text-2xl font-bold text-primary">Selected Work</h2>
-        <a
-          href="/projects"
-          className="text-sm text-neutral-500 hover:text-neutral-900 transition-colors"
-        >
-          View all &rarr;
-        </a>
-      </div>
-      <div className="grid grid-cols-1 gap-10 md:grid-cols-2">
-        {displayedProjects.map((prj, idx) => {
-          return (
+      <p className="text-secondary max-w-lg pt-4 text-sm md:text-sm">
+          I love building systems that can scale and deliver value to users.
+      </p>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 py-4 ">
+        {
+          projects_data.map((prj,idx)=>(
             <motion.div
-              key={prj.title}
-              initial={{ opacity: 0, scale: 0.9 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              whileHover={{ y: -5, transition: { duration: 0.2 } }}
-              viewport={{ once: true }}
               transition={{
-                duration: 0.4,
-                delay: idx * 0.1,
-                ease: "easeOut",
+                duration:0.3,
+                delay:idx*0.1,
+                damping:40,
+                stiffness:20,
+
               }}
-              className="group cursor-pointer"
+              whileHover={{scale:1.05}}
+              key={prj.title}
+              className="group relative mb-4"
+              onHoverStart={()=>setSelected(prj.title)} 
+              onHoverEnd={()=>setSelected(null)}
             >
-              <Image
-                src={prj.image}
-                height={400}
-                width={400}
-                alt={prj.title}
-                className="w-full aspect-[4/3] rounded-2xl object-cover transition duration-500 group-hover:scale-105 group-hover:shadow-xl"
+              <Image src={prj.image} 
+                alt={prj.title} 
+                width={300} 
+                height={300} 
+                className={`rounded-xl object-cover w-full h-70 ${!selected || (selected && selected===prj.title)?'':'blur-[3px]'}`}
               />
-              <div className="mt-4">
-                <h2 className="font-semibold text-lg text-primary tracking-tight group-hover:text-amber-600 transition-colors">
-                  {prj.title}
-                </h2>
-                <p className="text-sm text-secondary mt-1 leading-relaxed line-clamp-2">
-                  {prj.description}
-                </p>
-                {/* Optional: Show tags if available, like in the projects page */}
-                <div className="flex flex-wrap gap-2 mt-3">
-                  {prj.tags.map((tag, i) => (
-                    <span
-                      key={i}
-                      className="text-xs text-neutral-500 bg-neutral-100 px-2 py-1 rounded-md"
-                    >
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            </motion.div>
-          );
-        })}
+              <h2 className="mt-2 font-medium tracking-tight text-neutral-600 absolute z-20 dark:text-white">
+                {prj.title}
+              </h2>
+              <p className="mt-10 text-sm text-secondary max-w-sm">
+                {prj.description}
+              </p>
+              </motion.div>
+          ))
+        }
       </div>
     </div>
   );

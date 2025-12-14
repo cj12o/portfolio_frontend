@@ -15,7 +15,6 @@ const index = () => {
   const [scrolled, setScrolled] = useState<boolean>(false);
 
   useMotionValueEvent(scrollY, "change", (latest) => {
-    // console.log("Scroll",latest)
     if (latest > 20) {
       setScrolled(true);
     } else {
@@ -25,7 +24,7 @@ const index = () => {
   return (
     <Container>
       <motion.nav
-        className="fixed top-0 inset-x-0 z-0 flex max-w-4xl mx-auto items-center justify-between p-2 bg-white rounded-l-full rounded-r-full"
+        className="fixed top-0 inset-x-0 z-50 flex max-w-4xl mx-auto items-center justify-between py-3 px-4 rounded-l-full rounded-r-full bg-white "
         animate={{
           boxShadow: scrolled ? "var(--shadow-s1)" : "none",
           maxWidth: scrolled ? "50%" : "70%",
@@ -33,7 +32,7 @@ const index = () => {
         }}
         transition={{
           duration: 0.3,
-          ease: "linear",
+          ease: "easeInOut",
         }}
       >
         <Image
@@ -41,7 +40,7 @@ const index = () => {
           src="/neymar.jpg"
           height={100}
           width={100}
-          alt="neymar"
+          alt="avtar"
         />
         <div className="flex items-center gap-3">
           {items.map((item, idx) => {
