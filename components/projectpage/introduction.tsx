@@ -7,6 +7,14 @@ const introduction = ({project_id}:{project_id:string}) => {
     <div>
         <h1>{prj.title}</h1>
         <p>{prj.description}</p>
+        <video
+          src={prj.videoUrl}
+          controls
+          autoPlay
+          loop
+          muted
+          className="w-full h-full object-cover"
+        />
     </div>
   )
 }

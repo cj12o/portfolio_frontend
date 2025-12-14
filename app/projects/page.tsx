@@ -21,6 +21,7 @@ type Tabtyp={
     file_name:string;
     openedCurrently:boolean;
     tab_id?:string;
+    path_to_display:string;
 }
 
 const page = () => {
@@ -60,14 +61,14 @@ const page = () => {
     }
 
 
-    const tabHandler=(file_name:string,project_id:string)=>{
+    const tabHandler=(file_name:string,project_id:string,project_name:string)=>{
         const tab_id=file_name+project_id
         if(file_name=="Intro.md"){
             setIntroSelected((prev)=>!prev)
             setOpenTabs((prev)=>{
                 const exists = prev.some(tab => tab.tab_id === tab_id)
                 if(exists) return prev
-                return [...prev,{file_name:file_name,project_id:project_id,openedCurrently:true,tab_id:tab_id}]
+                return [...prev,{file_name:file_name,project_id:project_id,openedCurrently:true,tab_id:tab_id,path_to_display:`${project_name}/${file_name}`}]
             })
         }
         else  if(file_name=="Challenges.tsx"){
@@ -75,7 +76,7 @@ const page = () => {
             setOpenTabs((prev)=>{
                 const exists=prev.some(tab=>tab.tab_id===tab_id)
                 if(exists) return prev
-                return [...prev,{file_name:file_name,project_id:project_id,openedCurrently:true,tab_id:tab_id}]
+                return [...prev,{file_name:file_name,project_id:project_id,openedCurrently:true,tab_id:tab_id,path_to_display:`${project_name}/${file_name}`}]
             })
         }
         else {
@@ -112,7 +113,7 @@ const page = () => {
             >
             {/* file name */}
             <span className="truncate">
-                {tab.file_name}
+                {tab.path_to_display}
             </span>
 
             {/* close button */}
@@ -161,7 +162,7 @@ const page = () => {
                                     projectIdOpen===prj.id && filetree.map((fl,idx)=>{
                                         return <div className='hover:underline'
                                         onClick={()=>{
-                                            tabHandler(fl,prj.id)
+                                            tabHandler(fl,prj.id,prj.title)
                                         }}>
                                             {fl}
                                         </div>
