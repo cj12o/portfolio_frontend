@@ -7,9 +7,6 @@ import { useState } from "react";
 
 const projects = () => {
   const [selected, setSelected] = useState<string | null>(null);
-
-  const Selected_OPACITY=1;
-  const Unselected_OPACITY=0.4;
   
   return (
     <div className="py-10">
@@ -20,6 +17,9 @@ const projects = () => {
         {
           projects_data.map((prj,idx)=>(
             <motion.div
+              initial={{opacity:0,y:100}}
+              whileInView={{opacity:1,y:0}}
+
               transition={{
                 duration:0.3,
                 delay:idx*0.1,

@@ -2,6 +2,8 @@ import Container from "@/components/container";
 import Projects from "@/components/projects";
 import Stack from "@/components/stack";
 import ProjectComponent from "@/components/projects";
+import { Landingblogs } from "@/components/landingblogs";
+
 export default function Home() {
   return (
     <div className="min-h-screen flex items-start justify-start">
@@ -16,6 +18,7 @@ export default function Home() {
           and efficient systems to serve the needs of users.
         </p>
         <ProjectComponent/>
+        <Landingblogs/>
       </Container>
     </div>
   );

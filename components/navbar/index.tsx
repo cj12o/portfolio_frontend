@@ -3,7 +3,7 @@ import Container from "@/components/container";
 import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { motion, useMotionValueEvent, useScroll } from "framer-motion";
+import { motion, useMotionValueEvent, useScroll, useTransform } from "framer-motion";
 
 import { NAV_ITEMS } from "@/data";
 
@@ -14,6 +14,8 @@ const index = () => {
 
   const [scrolled, setScrolled] = useState<boolean>(false);
 
+  const y=useTransform(scrollY,[0,100],[0,10]);
+  const width=useTransform(scrollY,[0,100],["100%","60%"])
   useMotionValueEvent(scrollY, "change", (latest) => {
     if (latest > 20) {
       setScrolled(true);
@@ -25,10 +27,10 @@ const index = () => {
     <Container>
       <motion.nav
         className="fixed top-0 inset-x-0 z-50 flex max-w-4xl mx-auto items-center justify-between py-3 px-4 rounded-l-full rounded-r-full bg-white "
-        animate={{
+        style={{
           boxShadow: scrolled ? "var(--shadow-s1)" : "none",
-          maxWidth: scrolled ? "50%" : "70%",
-          y: scrolled ? 10 : 0,
+          width:width,
+          y:y,
         }}
         transition={{
           duration: 0.3,
