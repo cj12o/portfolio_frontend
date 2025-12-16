@@ -1,5 +1,6 @@
 import { getAllblogs } from '@/utils/mdx'
 import Link  from 'next/link'
+import { Sectionheading } from './sectionheading'
 
 export const Landingblogs = async() => {
     const allBlogs=await getAllblogs()
@@ -8,9 +9,9 @@ export const Landingblogs = async() => {
     }
   return (
     <div className=''>
-        <p className='text-secondary max-w-lg text-sm md:text-sm mb-12'>
+        <Sectionheading delay={0.2} className='pb-2'>
             my write ups
-        </p>
+        </Sectionheading>
         <div className="flex fl  ex-col gap-4 py-4 ">
             {
                 allBlogs && allBlogs.map((blog,idx)=>{

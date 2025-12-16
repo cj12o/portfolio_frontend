@@ -3,7 +3,8 @@ import { Metadata } from "next";
 import { getAllblogs } from "@/utils/mdx";
 import Image from "next/image";
 import Link from "next/link";
-import { truncate } from "fs";
+import { Heading } from "@/components/heading";
+
 
 export const metadata:Metadata={
     title:"All  blogs -Chitransh Jain",
@@ -18,10 +19,10 @@ export default async function BlogsPage() {
     
     return (
     <div className="min-h-screen flex items-start justify-start">
-      <Container classname="min-h-[200vh] md:pt-20 md:pb-10">
-        <h1 className="font-bold  text-2xl md:text-4xl tracking-tight text-primary mr-3">
+      <Container classname="min-h-screen md:pt-20 md:pb-10">
+        <Heading>
           All blogs
-        </h1>
+        </Heading>
         <div className="flex flex-col gap-4 py-4 ">
             {
                 allBlogs && allBlogs.map((blog,idx)=>{

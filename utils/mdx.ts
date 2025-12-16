@@ -13,7 +13,7 @@ export const getSingleBlog=async (slug:string)=>{
         const slug_new=`${slug}.mdx`
         const singleBlog=await fs.readFile(path.join(process.cwd(),"data/blogsdata",slug_new),'utf8')
         
-        const {content,frontmatter}=await compileMDX<{title:string}>({
+        const {content,frontmatter}=await compileMDX<Frontmatter>({
             source:singleBlog,
             options:{parseFrontmatter:true}
         })

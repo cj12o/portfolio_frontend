@@ -6,6 +6,7 @@ import Link from "next/link";
 import { motion, useMotionValueEvent, useScroll, useTransform } from "framer-motion";
 
 import { NAV_ITEMS } from "@/data";
+import { redirect } from "next/navigation";
 
 const index = () => {
   const items = NAV_ITEMS;
@@ -42,7 +43,10 @@ const index = () => {
           src="/neymar.jpg"
           height={100}
           width={100}
-          alt="avtar"
+          alt="avatar"
+          onClick={()=>{
+            redirect("/")
+          }}
         />
         <div className="flex items-center gap-3">
           {items.map((item, idx) => {
