@@ -1,6 +1,12 @@
 type Project = {
   id: string;
-  techstack:string[],
+  techstack:{
+    frontend:string [],
+    backend:string [],
+    containerization:string [],
+    database:string [],
+    other:string[]
+  },
   title: string;
   description: string;
   videoUrl?: string; // Made optional
@@ -14,7 +20,13 @@ type Project = {
 const projectsData: Project[] = [
   {
     id: "1",
-    techstack:["python","js","langraph"],
+    techstack:{
+      frontend:["React","Tailwindcss"],
+      backend:["Django","DjangoRestFramework","DjangoChannels","Celery"],
+      containerization:["Docker"],
+      database:["Postgresql"],
+      other:["Langchain","Langgraph"]
+    },
     title: "Agentic Chatrooms",
     description:
       "Education is the cornerstone of personal and societal development. It empowers individuals with knowledge, critical thinking skills, and the ability to make amplified the role of education, making lifelong learning essential to adapt to rapid changes. Moreover, education supports innovation and critical analysis, which are vital for solving complex global challenges such as climate change, poverty, and public health crises.",
@@ -36,6 +48,7 @@ const projectsData: Project[] = [
     id: "2",
     techstack:["python","js","langraph"],
     title: "Data Analytics Engine",
+    videoUrl: "/demovids/21-35-51.mp4",
     description:
       "A powerful data processing pipeline designed to handle large datasets with ease. Implements advanced algorithms for pattern recognition and predictive modeling.",
     challenges: [
@@ -50,6 +63,7 @@ const projectsData: Project[] = [
     id: "3",
     techstack:["python","js","langraph"],
     title: "Infrastructure Config",
+    videoUrl: "/demovids/21-35-51.mp4",
     description:"Configuration management system for automated deployment and scaling of microservices architecture.",
     challenges: [],
   },

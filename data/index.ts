@@ -16,9 +16,9 @@ export const NAV_ITEMS = [
     href: "/blogs",
   },
   {
-    name:"tree",
-    href: "/tree",
-  }
+    name: "Home",
+    href: "/",
+  },
 ];
 
 export const SKILLS = [

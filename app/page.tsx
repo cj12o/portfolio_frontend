@@ -16,8 +16,7 @@ export default function Home() {
           </Heading>
         </div>
         <Subheading>
-          I'm an aspiring software engineer with a passion for building scalable
-          and efficient systems to serve the needs of users.
+          I use code as a medium to explore ideas — sometimes elegant, sometimes imperfect, but always intentional.    
         </Subheading>
         <ProjectComponent/>
         <Landingblogs/>

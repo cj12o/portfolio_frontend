@@ -9,7 +9,11 @@ import { NAV_ITEMS } from "@/data";
 import { redirect } from "next/navigation";
 
 const index = () => {
+  
   const items = NAV_ITEMS;
+
+  const [on,setOn]=useState<string>("Home")
+
   const [hover, setHover] = useState<number | null>(-1);
   const { scrollY } = useScroll();
 
@@ -25,7 +29,7 @@ const index = () => {
     }
   });
   return (
-    <Container>
+    <div>
       <motion.nav
         className="fixed top-0 inset-x-0 z-50 flex max-w-4xl mx-auto items-center justify-between py-3 px-4 rounded-l-full rounded-r-full bg-white "
         style={{
@@ -45,11 +49,34 @@ const index = () => {
           width={100}
           alt="avatar"
           onClick={()=>{
+            setHover(-1)
+            setOn("Home")
             redirect("/")
+           
           }}
         />
         <div className="flex items-center gap-3">
-          {items.map((item, idx) => {
+           {
+            on!="Home" && (
+              <Link
+                className="relative text-sm px-2 py-1"
+                onMouseEnter={() => setHover(items.length-1)}
+                onMouseLeave={() => setHover(-1)}
+                href={items[items.length-1].href}
+                key={items.length-1}
+                onClick={()=>setOn(items[items.length-1].name)}
+              >
+                {hover == items.length-1 ? (
+                  <motion.span
+                    layoutId="hovered-span"
+                    className="h-full w-full absolute inset-0 rounded-md bg-neutral-300"
+                  />
+                ) : null}
+                <span className={on==items[items.length-1].name?"relative z-10 border-b-2 border-black ":"relative z-10"}>{items[items.length-1].name}</span>
+              </Link>
+            )
+          }
+          {items.slice(0,items.length-1).map((item, idx) => {
             return (
               <Link
                 className="relative text-sm px-2 py-1"
@@ -57,6 +84,7 @@ const index = () => {
                 onMouseLeave={() => setHover(-1)}
                 href={item.href}
                 key={idx}
+                onClick={()=>setOn(item.name)}
               >
                 {hover == idx ? (
                   <motion.span
@@ -64,13 +92,13 @@ const index = () => {
                     className="h-full w-full absolute inset-0 rounded-md bg-neutral-300"
                   />
                 ) : null}
-                <span className="relative z-10">{item.name}</span>
+                <span className={on==item.name?"relative z-10 border-b-2 border-black ":"relative z-10"}>{item.name}</span>
               </Link>
             );
           })}
         </div>
       </motion.nav>
-    </Container>
+    </div>
   );
 };
 

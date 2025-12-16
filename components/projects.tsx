@@ -12,8 +12,9 @@ const projects = () => {
   
   return (
     <div className="py-10">
-      <Sectionheading delay={0.01}>
-          I love building systems that can scale and deliver value to users.
+      <Sectionheading delay={0.01} >
+        I’m interested in how systems behave at scale: real-time communication, data flows, and intelligent agents. 
+        Most of my projects are experiments/attempts to understand complexity by building it.
       </Sectionheading>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4 py-4 ">
         {

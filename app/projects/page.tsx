@@ -6,6 +6,7 @@ import { motion } from "framer-motion";
 
 import Challenges from "@/components/projectpage/challenges";
 import Intro from "@/components/projectpage/introduction";
+import { cn } from "@/lib/utils";
 
 type Tabtyp = {
   project_id: string;
@@ -106,7 +107,7 @@ const ProjectsPage = () => {
   };
 
   return (
-    <div className="py-10 max-w-7xl mx-auto w-full px-4">
+    <div className="py-10 max-w-7xl mx-auto w-full px-4 mt-12">
       <div className="w-full bg-background border border-border rounded-lg overflow-hidden flex flex-col h-[80vh] shadow-sm">
         {/* Window Header / Tabs */}
         <div className="flex h-10 bg-muted/30 border-b border-border">
@@ -265,24 +266,13 @@ const ProjectsPage = () => {
           </motion.div>
 
           {/* Content Area */}
-          <div className="flex-1 bg-background relative overflow-y-auto">
+          <div className={cn("flex-1 bg-background relative overflow-y-auto",( introSelected || challengeSelected? "bg-white" : ""))}>
             <div className="p-8 pb-20 min-h-full">
               {openTabs.length > 0 && (introSelected || challengeSelected) ? (
                 <>
                   {introSelected && projectIdOpen !== "-1" && (
-                    <>
                     <Intro project_id={projectIdOpen} />
-                    <div className="w-1/2 rounded-lg border border-border bg-black overflow-hidden aspect-video relative shadow-sm">
-                        <video
-                        src={projectsData[Number(projectIdOpen)-1].videoUrl}  
-                        controls
-                        muted={true}
-                        autoPlay={true}
-                        preload="auto"
-                        className="w-full h-full object-contain"
-                        />
-                    </div>
-                    </>
+                  
                   )}
                   {challengeSelected && projectIdOpen !== "-1" && (
                     <Challenges project_id={projectIdOpen} />
