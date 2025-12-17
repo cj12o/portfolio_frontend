@@ -82,19 +82,15 @@ export const projects = [
 
 export const SOCIAL_LINKS = [
   {
-    name: "Email",
-    value: "chitransh@example.com",
-    href: "mailto:chitransh@example.com",
+    name: "Gmail",
+    href: "mailto:jchitransh5@gmail.com",
   },
-  { name: "Twitter", value: "@chitransh", href: "https://twitter.com" },
   {
     name: "GitHub",
-    value: "github.com/chitransh",
-    href: "https://github.com",
+    href: "https://github.com/cj12o",
   },
   {
     name: "LinkedIn",
-    value: "linkedin.com/in/chitransh",
-    href: "https://linkedin.com",
+    href: "https://www.linkedin.com/in/chitransh-jain-71bbb3336/",
   },
 ];

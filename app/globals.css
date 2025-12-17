@@ -40,4 +40,5 @@
 
   --color-primary: var(--color-neutral-800);
   --color-secondary: var(--color-neutral-600);
+  --color-bgdark:var(--color-gray-900)
 }

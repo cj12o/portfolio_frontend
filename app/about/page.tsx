@@ -24,30 +24,31 @@ import {
 } from "react-icons/si";
 
 import { motion, AnimatePresence } from "framer-motion";
+import { cn } from "@/lib/utils";
 
 const regionData = {
   frontend: {
-    title: "Frontend Nagar",
+    title: "Frontend",
     desc: "Crafting pixel-perfect, responsive user interfaces. The land of visual storytelling.",
-    level: "Lv. 90",
+    level: 3,
     color: "text-blue-400",
   },
   backend: {
-    title: "Backend Nagar",
-    desc: "Architecting robust logic and scalable APIs. The engine room of the web.",
-    level: "Lv. 85",
+    title: "Backend",
+    desc: "I can architect robust logic and scalable APIs.",
+    level: 3,
     color: "text-green-400",
   },
   devops: {
     title: "DevOps Area",
-    desc: "Automating pipelines and managing infrastructure. The bridge between code and cloud.",
-    level: "Lv. 80",
+    desc: "Working with Git workflows and Docker containerization as part of development.",
+    level: 1,
     color: "text-orange-400",
   },
   genai: {
     title: "GenAI Zone",
-    desc: "Integrating Large Language Models and intelligent agents. The frontier of innovation.",
-    level: "Lv. 88",
+    desc: "Building GenAI features using prompt engineering, retrieval-augmented generation (RAG), and basic agent workflows.",
+    level: 3,
     color: "text-purple-400",
   },
 };
@@ -56,8 +57,8 @@ export default function About() {
   const [activeRegion, setActiveRegion] = useState<string | null>(null);
 
   return (
-    <div className="min-h-screen flex items-start justify-start">
-      <Container classname="min-h-screen px-10 md:pt-20 md:pb-10">
+    <div className="min-h-screen flex items-start justify-start dark:bg-bgdark">
+      <Container classname="min-h-screen px-10 md:pt-20 md:pb-10 ">
         <Heading>About Me</Heading>
         <Subheading>
           I'm a passionate software engineer who loves turning ideas into
@@ -73,12 +74,15 @@ export default function About() {
       
 
         {/* INTERACTIVE MAP CONTAINER */}
-        <div className="relative mx-auto mt-16 w-[620px] h-[620px] overflow-hidden bg-white shadow-2xl border border-slate-200">
+        <div className="relative mx-auto mt-16 w-[620px] h-[620px] overflow-hidden bg-white shadow-2xl border border-slate-200
+        dark:var(--shadow-s2)  var(--shadow-s1) rounded-xl
+        ">
           {/* BACKGROUND MAP */}
           <motion.div
             className="absolute inset-0"
             animate={{ scale: activeRegion ? 1.05 : 1.1 }}
             transition={{ duration: 0.8 }}
+
           >
             <Image
               src="/assets/map1.png"
@@ -384,11 +388,26 @@ export default function About() {
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -10 }}
-                  className="w-full flex justify-between items-center"
+                  className="w-full grid justify-center items-center p-3"
                 >
-                  <div className="flex flex-col">
+                  <div className="items-center">XP</div>
+                  <div className="w-full md:h-2 flex">
+                    
+                    {
+                      Array.from({ length: 6 }).map((_, idx) => (
+                        <div className={cn("border border-black dark:border-white h-full w-1/5",
+                          regionData[activeRegion as keyof typeof regionData].level>idx?"bg-red-600":"")}>
+                          </div>
+                      ))
+                    }
+                    <div></div>
+                  </div>
+                  {/* {info} */}
+                  <div className="flex h-2/3">
+
+                  <div className="flex ">
                     <h3
-                      className={`font-bold text-lg uppercase tracking-widest ${regionData[activeRegion as keyof typeof regionData].color}`}
+                      className={`font-bold mr-2 text-lg uppercase tracking-widest ${regionData[activeRegion as keyof typeof regionData].color}`}
                     >
                       {
                         regionData[activeRegion as keyof typeof regionData]
@@ -399,18 +418,6 @@ export default function About() {
                       {regionData[activeRegion as keyof typeof regionData].desc}
                     </p>
                   </div>
-                  <div className="flex flex-col items-end border-l border-white/20 pl-4">
-                    <span className="text-xs text-gray-500 uppercase">
-                      Proficiency
-                    </span>
-                    <span
-                      className={`text-2xl font-mono font-bold ${regionData[activeRegion as keyof typeof regionData].color}`}
-                    >
-                      {
-                        regionData[activeRegion as keyof typeof regionData]
-                          .level
-                      }
-                    </span>
                   </div>
                 </motion.div>
               ) : (

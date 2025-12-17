@@ -9,7 +9,7 @@ import MotionWrapper from "@/components/motionwrapper";
 
 export default function Home() {
   return (
-    <div className="min-h-screen flex items-start justify-start dark:bg-gray-900">
+    <div className="min-h-screen flex items-start justify-start dark:bg-bgdark">
       <Container classname="min-h-screen md:pt-20 md:pb-10">
         <div className="flex group ">
           <Heading>

@@ -6,10 +6,10 @@ import { motion } from "framer-motion"
 
 export const Timeline = () => {
   return (
-    <Container classname="relative p-4 md:p-5 bg-neutral-100 rounded-xl ">
+    <Container classname="relative p-4 md:p-5 bg-neutral-100 rounded-xl dark:bg-gray-800">
 
       {/* SINGLE timeline line */}
-      <div className="absolute left-14.5 top-0 h-full w-[2px] bg-black z-10" />
+      <div className="absolute left-14.5 top-0 h-full w-[2px] bg-black z-10 dark:bg-white/65"/>
 
       {eduTimeline.map((edu, idx) => (
         <motion.div
@@ -29,13 +29,13 @@ export const Timeline = () => {
           </div>
 
           <div className="mt-2.5 w-full">
-            <h3 className="text-primary font-bold">
+            <h3 className="text-primary font-bold dark:text-white mb-2 ">
               {edu.organisation}
             </h3>
 
-            <div className="flex">
-              <h4 className="mr-4">{edu.domain}</h4>
-              <p>
+            <div className="relative flex dark:text-white/70">
+              <h4 className="mr-4 font-medium">{edu.domain}</h4>
+              <p className="absolute right-10 font-semibold">
                 {new Date(edu.startdate!).toLocaleDateString("en-US", {
                   month: "short",
                   year: "numeric",
