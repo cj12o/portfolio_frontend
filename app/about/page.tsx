@@ -65,12 +65,12 @@ export default function About() {
           development, I focus on creating efficient, scalable solutions that
           make a real impact.
         </Subheading>
-        <p className="text-secondary text-sm md:text-base pt-4 max-w-2xl leading-relaxed">
-          Here's my Education Timeline
-          <div>
-            <Timeline />
-          </div>
-        </p>
+        <p className="text-secondary text-sm md:text-base pt-4 max-w-2xl leading-relaxed"></p>
+        Here's my Education Timeline
+        <div>
+          <Timeline />
+        </div>
+      
 
         {/* INTERACTIVE MAP CONTAINER */}
         <div className="relative mx-auto mt-16 w-[620px] h-[620px] overflow-hidden bg-white shadow-2xl border border-slate-200">

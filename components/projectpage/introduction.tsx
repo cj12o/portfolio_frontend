@@ -63,7 +63,7 @@ const TechCategory = ({ label, items }: { label: string; items: string[] }) => {
           {label}
         </h3>
       </div>
-      
+
       <div className="flex flex-wrap gap-2">
         {items.map((tech) => (
           <div
@@ -103,24 +103,23 @@ const Introduction = ({ project_id }: { project_id: string }) => {
         {/* {vid} */}
         <div className="w-1/2">
           <div className="relative rounded-2xl overflow-hidden shadow-2xl border border-border/20 bg-black/5 aspect-video group">
-          {url ? (
-            <video
-              src={url}
-              className="w-full h-full object-cover"
-              controls
-              muted
-              playsInline
-            >
-              Your browser does not support the video tag.
-            </video>
-          ) : (
-            <div className="w-full h-full flex items-center justify-center bg-secondary/20 text-muted-foreground">
-              <span className="text-sm">No Preview Available</span>
-            </div>
-          )}
+            {url ? (
+              <video
+                src={url}
+                className="w-full h-full object-cover"
+                controls
+                muted
+                playsInline
+              >
+                Your browser does not support the video tag.
+              </video>
+            ) : (
+              <div className="w-full h-full flex items-center justify-center bg-secondary/20 text-muted-foreground">
+                <span className="text-sm">No Preview Available</span>
+              </div>
+            )}
+          </div>
         </div>
-        </div>
-        
       </div>
 
       {/* tech stack */}
@@ -132,7 +131,7 @@ const Introduction = ({ project_id }: { project_id: string }) => {
           label="Infrastructure"
           items={prj.techstack.containerization}
         />
-        <TechCategory label="Other tools" items={prj.techstack.other} /> 
+        <TechCategory label="Other tools" items={prj.techstack.other} />
       </div>
     </div>
   );

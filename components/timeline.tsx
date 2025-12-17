@@ -6,7 +6,7 @@ import { motion } from "framer-motion"
 
 export const Timeline = () => {
   return (
-    <Container classname="relative p-4 md:p-5 bg-neutral-100 rounded-xl md:ml-15">
+    <Container classname="relative p-4 md:p-5 bg-neutral-100 rounded-xl ">
 
       {/* SINGLE timeline line */}
       <div className="absolute left-14.5 top-0 h-full w-[2px] bg-black z-10" />

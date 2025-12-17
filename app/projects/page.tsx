@@ -1,12 +1,13 @@
 "use client";
 import React, { useState } from "react";
-import { ChevronRight, Folder, FileCode, X } from "lucide-react";
+import { ChevronRight, FileCode, X ,SidebarCloseIcon,SidebarOpenIcon,FolderOpen,FolderClosed} from "lucide-react";
 import { projectsData, filetree } from "@/data/project-data";
 import { motion } from "framer-motion";
 
 import Challenges from "@/components/projectpage/challenges";
 import Intro from "@/components/projectpage/introduction";
 import { cn } from "@/lib/utils";
+
 
 type Tabtyp = {
   project_id: string;
@@ -24,6 +25,8 @@ const ProjectsPage = () => {
   const [challengeSelected, setChallengeSelected] = useState<boolean>(false);
 
   const [openTabs, setOpenTabs] = useState<Tabtyp[]>([]);
+
+  const [fileSelected,setFileSelected]=useState<string>("")
 
   const setTabInFocus = (tab_id: string) => {
     const tab = openTabs.find((tab) => tab.tab_id == tab_id);
@@ -108,14 +111,19 @@ const ProjectsPage = () => {
 
   return (
     <div className="py-10 max-w-7xl mx-auto w-full px-4 mt-12">
-      <div className="w-full bg-background border border-border rounded-lg overflow-hidden flex flex-col h-[80vh] shadow-sm">
+      <div className="w-full bg-background border border-border rounded-lg overflow-hidden flex flex-col h-[80vh] shadow-sm
+      backdrop-blur-2xl
+      bg-white/70
+      border border-white/60
+      rounded-2xl
+      shadow-[0_8px_30px_rgba(0,0,0,0.12)]">
         {/* Window Header / Tabs */}
-        <div className="flex h-10 bg-muted/30 border-b border-border">
+        <div className="flex h-10 bg-muted/30 border-b border-gray-300">
           {/* Sidebar Toggle */}
           <div
             className={`${
               sidebarOpen ? "w-64" : "w-12"
-            } flex-shrink-0 border-r border-border flex items-center px-4 transition-all duration-300 ease-in-out`}
+            } flex-shrink-0 border-r border-gray-300 flex items-center px-4 transition-all duration-300 ease-in-out`}
           >
             <h3
               className={`text-xs font-semibold text-muted-foreground uppercase tracking-wider ${
@@ -131,21 +139,7 @@ const ProjectsPage = () => {
               }`}
             >
               {/* Simple icon for sidebar toggle */}
-              <svg
-                width="16"
-                height="16"
-                viewBox="0 0 15 15"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-                className="w-4 h-4"
-              >
-                <path
-                  d="M1.5 3C1.22386 3 1 3.22386 1 3.5V11.5C1 11.7761 1.22386 12 1.5 12H13.5C13.7761 12 14 11.7761 14 11.5V3.5C14 3.22386 13.7761 3 13.5 3H1.5ZM2 4H4V11H2V4ZM5 11V4H13V11H5Z"
-                  fill="currentColor"
-                  fillRule="evenodd"
-                  clipRule="evenodd"
-                ></path>
-              </svg>
+              {sidebarOpen ?<SidebarCloseIcon size={20} />:<SidebarOpenIcon size={20} />}
             </button>
           </div>
 
@@ -154,15 +148,18 @@ const ProjectsPage = () => {
             {openTabs.map((tab) => (
               <div
                 key={tab.tab_id}
-                onClick={() => setTabInFocus(String(tab.tab_id))}
+                onClick={() =>{
+                  setTabInFocus(String(tab.tab_id))
+                  setFileSelected(tab.file_name)
+                }}
                 className={`
-                                    group flex items-center max-w-[200px] h-full px-3 py-1 border-r border-border cursor-pointer select-none text-xs md:text-sm font-medium
-                                    ${
-                                      tab.openedCurrently
-                                        ? "bg-background text-primary border-t-2 border-t-primary"
-                                        : "bg-muted/10 text-muted-foreground hover:bg-muted/20"
-                                    }
-                                `}
+                  group flex items-center max-w-[200px] h-full px-3 py-1  border-gray-300 cursor-pointer select-none text-xs md:text-sm font-medium
+                  ${
+                    tab.openedCurrently
+                      ? "bg-background text-primary bg-gray-100 border-t-2 border-t-primary"
+                      : "bg-muted/10 text-muted-foreground hover:bg-muted/20"
+                  }
+                `}
               >
                 <span className="mr-2">
                   {tab.file_name.endsWith(".tsx") ? (
@@ -189,27 +186,28 @@ const ProjectsPage = () => {
           <motion.div
             initial={false}
             animate={{ width: sidebarOpen ? "16rem" : "3rem" }}
-            className="bg-muted/10 border-r border-border overflow-y-auto flex-shrink-0"
+            className="bg-muted/10 border-r border-gray-300 overflow-y-auto flex-shrink-0"
           >
             <div className="py-2">
               {projectsData.map((prj) => (
                 <div key={prj.id}>
                   <div
                     className={`
-                                            flex items-center px-4 py-1.5 cursor-pointer 
-                                            ${
-                                              projectIdOpen === prj.id
-                                                ? "bg-accent/50 text-accent-foreground"
-                                                : "text-muted-foreground hover:text-foreground hover:bg-accent/30"
-                                            }
-                                            ${
-                                              !sidebarOpen &&
-                                              "justify-center px-0"
-                                            }
-                                        `}
-                    onClick={() =>
+                      flex items-center px-4 py-1.5 cursor-pointer 
+                      ${
+                        projectIdOpen === prj.id
+                          ? "bg-accent/50 text-accent-foreground"
+                          : "text-muted-foreground hover:text-foreground hover:bg-accent/30"
+                      }
+                      ${
+                        !sidebarOpen &&
+                        "justify-center px-0"
+                      }
+                    `}
+                    onClick={() =>{
                       setProjectIdOpen(projectIdOpen === prj.id ? "-1" : prj.id)
-                    }
+                      setFileSelected("")
+                    }}
                     title={prj.title}
                   >
                     {sidebarOpen ? (
@@ -219,36 +217,33 @@ const ProjectsPage = () => {
                             projectIdOpen === prj.id ? "rotate-90" : ""
                           }`}
                         />
-                        <Folder
-                          className={`w-4 h-4 mr-2 ${
-                            projectIdOpen === prj.id
-                              ? "text-blue-500 fill-blue-500/20"
-                              : ""
-                          }`}
-                        />
-                        <span className="text-sm truncate font-medium">
+                        {
+                          projectIdOpen === prj.id?(
+                            <FolderOpen className=" fill-blue-500/20" size={23}/>
+                          ):(
+                            <FolderClosed className="text-blue-500 " size={23}/>
+                          )
+                        }
+                        <span className="ml-3 text-sm truncate font-medium">
                           {prj.title}
                         </span>
                       </>
                     ) : (
-                      <Folder
-                        className={`w-5 h-5 ${
-                          projectIdOpen === prj.id
-                            ? "text-blue-500 fill-blue-500/20"
-                            : ""
-                        }`}
-                      />
+                      <FolderClosed className="text-blue-500 " size={33}/> 
                     )}
                   </div>
 
                   {/* Sub-files */}
                   {projectIdOpen === prj.id && sidebarOpen && (
-                    <div className="ml-5 border-l border-border/50 pl-1 mt-1 mb-2">
+                    <div className="ml-5 border-l border-gray-300 pl-1 mt-1 mb-2">
                       {filetree.map((fl) => (
                         <div
                           key={fl}
-                          className="flex items-center px-4 py-1 text-sm text-muted-foreground hover:text-foreground cursor-pointer hover:bg-accent/30 rounded-r-sm"
-                          onClick={() => tabHandler(fl, prj.id, prj.title)}
+                          className={cn("flex items-center px-4 py-1 text-sm text-muted-foreground hover:text-foreground cursor-pointer hover:bg-accent/30 rounded-r-sm",fileSelected === fl ? "bg-neutral-100 rounded-xl" : "")}                          
+                          onClick={() =>{
+                            tabHandler(fl, prj.id, prj.title)
+                            setFileSelected(fl)
+                          }}
                         >
                           {fl.endsWith(".tsx") ? (
                             <FileCode className="w-3.5 h-3.5 mr-2 text-blue-400" />

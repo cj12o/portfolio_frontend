@@ -1,6 +1,5 @@
 import Container from "@/components/container";
 import Projects from "@/components/projects";
-import Stack from "@/components/stack";
 import ProjectComponent from "@/components/projects";
 import { Landingblogs } from "@/components/landingblogs";
 import { Heading } from "@/components/heading";

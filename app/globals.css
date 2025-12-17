@@ -4,6 +4,11 @@
 
 @custom-variant dark (&:is(.dark *));
 
+:root {
+  --pattern-fg: 0 0 0 / 0.2;
+}
+
+
 @theme inline {
   
   --shadow-s1: 0px 2px 5px -1px rgba(0, 0, 0, 0.1),
@@ -15,6 +20,7 @@
 }
 
 .dark {
+  --pattern-fg: 255 255 255 / 0.08;
   --color-primary: var(--color-neutral-100);
   --color-secondary: var(--color-neutral-400);
 }
