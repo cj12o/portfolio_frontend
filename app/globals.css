@@ -6,7 +6,24 @@
 
 :root {
   --pattern-fg: 0 0 0 / 0.2;
+  --background: 0 0% 100%;        /* white */
+  --foreground: 222 47% 11%;      /* slate-900 */
+  --card: 0 0% 100%;
+  --border: 214 32% 91%;          /* slate-200 */
+  --muted: 210 40% 96%;           /* slate-100 */
 }
+
+.dark {
+  --pattern-fg: 255 255 255 / 0.08;
+  --color-primary: var(--color-neutral-100);
+  --color-secondary: var(--color-neutral-400);
+  --background: 222 47% 11%;      /* slate-900 */
+  --foreground: 210 40% 98%;      /* slate-50 */
+  --card: 222 47% 13%;            /* slightly lighter than bg */
+  --border: 217 33% 17%;          /* slate-800 */
+  --muted: 215 28% 17%;           /* muted dark */
+}
+
 
 
 @theme inline {
@@ -15,12 +32,12 @@
     0px 1px 0px 0px rgba(25, 28, 33, 0.02),
     0px 0px 0px 1px rgba(25, 28, 33, 0.08);
 
+  --shadow-s2:
+    0px 2px 6px -1px rgba(0, 0, 0, 0.6),
+    0px 1px 0px 0px rgba(255, 255, 255, 0.04),
+    0px 0px 0px 1px rgba(255, 255, 255, 0.08);
+
+
   --color-primary: var(--color-neutral-800);
   --color-secondary: var(--color-neutral-600);
-}
-
-.dark {
-  --pattern-fg: 255 255 255 / 0.08;
-  --color-primary: var(--color-neutral-100);
-  --color-secondary: var(--color-neutral-400);
 }

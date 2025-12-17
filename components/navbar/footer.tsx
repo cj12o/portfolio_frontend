@@ -7,6 +7,7 @@ export const Footer = () => {
   return (
     <Container classname='flex justify-between p-3 border-t border-neutral-100'>
         <p className='text-xs text-neutral-500'>Build by:Chitransh Jain</p>
+        <p></p>
         <div className='flex items-center justify-center gap-4'>
             <Link href={'https://www.linkedin.com/in/chitransh-jain-71bbb3336/'}>
                 <SiLinkedin color="#0D597F" className="size-7 text-neutral-500 hover:text-neutral-700"/>

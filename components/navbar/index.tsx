@@ -7,14 +7,18 @@ import { motion, useMotionValueEvent, useScroll, useTransform } from "framer-mot
 
 import { NAV_ITEMS } from "@/data";
 import { redirect } from "next/navigation";
-
+import {useTheme} from "next-themes";
+import { SunIcon,MoonIcon } from "lucide-react";
+import { cn } from "@/lib/utils";
 const index = () => {
   
+  const{theme,setTheme}=useTheme();
+
   const items = NAV_ITEMS;
 
   const [on,setOn]=useState<string>("Home")
 
-  const [hover, setHover] = useState<number | null>(-1);
+  const [hover, setHover] = useState<string>("");
   const { scrollY } = useScroll();
 
   const [scrolled, setScrolled] = useState<boolean>(false);
@@ -31,9 +35,9 @@ const index = () => {
   return (
     <div>
       <motion.nav
-        className="fixed top-0 inset-x-0 z-50 flex max-w-4xl mx-auto items-center justify-between py-3 px-4 rounded-l-full rounded-r-full bg-white "
+        className={cn("fixed top-0 inset-x-0 z-50 flex max-w-4xl mx-auto items-center justify-between py-3 px-4 rounded-l-full rounded-r-full",scrolled?"dark:bg-black/25 backdrop-blur-md  ":"")}
         style={{
-          boxShadow: scrolled ? "var(--shadow-s1)" : "none",
+          boxShadow: scrolled ? theme == "dark" ? "var(--shadow-s2)" : "var(--shadow-s1)" : "none",
           width:width,
           y:y,
         }}
@@ -49,7 +53,7 @@ const index = () => {
           width={100}
           alt="avatar"
           onClick={()=>{
-            setHover(-1)
+            setHover("")
             setOn("Home")
             redirect("/")
            
@@ -60,13 +64,13 @@ const index = () => {
             on!="Home" && (
               <Link
                 className="relative text-sm px-2 py-1"
-                onMouseEnter={() => setHover(items.length-1)}
-                onMouseLeave={() => setHover(-1)}
+                onMouseEnter={() => setHover(items[items.length-1].name)}
+                onMouseLeave={() => setHover("")}
                 href={items[items.length-1].href}
                 key={items.length-1}
                 onClick={()=>setOn(items[items.length-1].name)}
               >
-                {hover == items.length-1 ? (
+                {hover == items[items.length-1].name ? (
                   <motion.span
                     layoutId="hovered-span"
                     className="h-full w-full absolute inset-0 rounded-md bg-neutral-300"
@@ -80,13 +84,13 @@ const index = () => {
             return (
               <Link
                 className="relative text-sm px-2 py-1"
-                onMouseEnter={() => setHover(idx)}
-                onMouseLeave={() => setHover(-1)}
+                onMouseEnter={() => setHover(item.name)}
+                onMouseLeave={() => setHover("")}
                 href={item.href}
                 key={idx}
                 onClick={()=>setOn(item.name)}
               >
-                {hover == idx ? (
+                {hover == item.name ? (
                   <motion.span
                     layoutId="hovered-span"
                     className="h-full w-full absolute inset-0 rounded-md bg-neutral-300"
@@ -96,6 +100,13 @@ const index = () => {
               </Link>
             );
           })}
+          <button
+          onClick={()=>{
+            theme==="dark"?setTheme("light"):setTheme("dark")
+          }}
+          >
+          {theme == "dark" ? <SunIcon/>:<MoonIcon/>}
+        </button>
         </div>
       </motion.nav>
     </div>

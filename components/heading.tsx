@@ -23,7 +23,7 @@ export const Heading = ({
     }}
     viewport={{once:true}}
     >
-        <Tag className={cn("font-bold drop-shadow-lg text-2xl md:text-4xl tracking-tighter text-primary mr-3",className)}>
+        <Tag className={cn("font-bold drop-shadow-lg text-2xl md:text-4xl tracking-tighter text-primary mr-3 dark:text-white",className)}>
             {children}
         </Tag>
     </motion.div>

@@ -4,7 +4,7 @@ import { Inter } from "next/font/google";
 import Navbar from "@/components/navbar/index";
 import { ViewTransition } from "react";
 import { Footer } from "@/components/navbar/footer";
-
+import { ThemeProvider } from "next-themes";
 
 const inter = Inter({
   weight: ["400", "500", "600", "700", "800", "900"],
@@ -24,12 +24,19 @@ export default function RootLayout({
   return (
     <ViewTransition>
     <html lang="en">
+      
       <body
         className={`${inter.className} antialiased bg-neutral-100 [--pattern-fg:var(--color-gray-950)]/5 `}
       >
-        <Navbar />
-        {children}
-        <Footer/>
+        <ThemeProvider
+        attribute="class"
+        defaultTheme="system"
+        enableSystem
+        >
+            <Navbar />
+            {children}
+            <Footer/>
+        </ThemeProvider>
       </body>
     </html>
     </ViewTransition>
