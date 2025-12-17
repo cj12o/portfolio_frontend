@@ -81,7 +81,7 @@ export default function Contact() {
           through any of the platforms below.
         </Sectionheading>
         {
-          popUp && <div className={cn("dark:bg-white dark:text-black text-sm var(--shadow-s1) items-center justify-center flex gap-2 px-4 py-2",popUp.success?"text-green-500":"text-red-500")}>
+          popUp && <div className={cn("dark:bg-white  text-sm var(--shadow-s1) items-center justify-center flex gap-2 px-4 py-2",popUp.success?"text-green-500":"text-red-500")}>
             {popUp.message}
           </div>
         }

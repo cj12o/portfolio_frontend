@@ -33,7 +33,7 @@ const index = () => {
     }
   });
   return (
-    <div>
+    <div className="dark:bg-bgdark bg-red-500">
       <motion.nav
         className={cn("fixed top-0 inset-x-0 z-50 flex max-w-4xl mx-auto items-center justify-between py-3 px-4 rounded-l-full rounded-r-full",scrolled?"dark:bg-black/25 backdrop-blur-md  ":"")}
         style={{
