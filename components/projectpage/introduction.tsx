@@ -8,6 +8,7 @@ import {
   SiPostgresql,
   SiTailwindcss,
   SiCelery,
+  SiLangchain
 } from "react-icons/si";
 import Image from "next/image";
 import { cn } from "@/lib/utils";
@@ -46,9 +47,10 @@ const getTechIcon = (techName: string, size: number = 16) => {
     case "django channels":
       return <SiDjango size={size} className="text-[#44B78B]" />; // Reusing Django icon for channels
     case "langchain":
-      return <span className="text-xs font-bold">🦜🔗</span>; // Fallback icon for Langchain if package not imported
+      return <SiLangchain size={size} className="text-[#FFA500]" />; // Fallback icon for Langchain if package not imported
     case "langgraph":
-      return <span className="text-xs font-bold">🕸️</span>;
+      return  <Image
+      src="/assets/langgraph.png" width={size} height={size}alt="langraph" color="#1C3C3C"/>
     default:
       return null;
   }
@@ -59,7 +61,7 @@ const TechCategory = ({ label, items }: { label: string; items: string[] }) => {
   return (
     <div className="flex p-2">
       <div className="flex p-1 items-center justify-center bg-neutral-200  rounded-full">
-        <h3 className="text-xs uppercase tracking-wider text-muted-foreground font-semibold">
+        <h3 className="text-xs uppercase tracking-wider text-muted-foreground font-semibold text-dark">
           {label}
         </h3>
       </div>
@@ -89,11 +91,11 @@ const Introduction = ({ project_id }: { project_id: string }) => {
   const url = prj.videoUrl;
 
   return (
-    <div className="w-full h-full grid grid-cols-1">
+    <div className="w-full h-full grid grid-cols-1 bg-white/75 pt-5 pl-3">
       {/* Content Section */}
       <div className="flex space-y-8">
         <div className="w-1/2 p-5">
-          <h1 className="text-3xl  font-medium bg-clip-text underline">
+          <h1 className="text-3xl font-medium bg-clip-text underline dark:text-black ">
             {prj.title}
           </h1>
           <p className="text-muted-foreground leading-relaxed text-sm lg:text-base">
