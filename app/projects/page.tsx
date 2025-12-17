@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { ChevronRight, FileCode, X ,SidebarCloseIcon,SidebarOpenIcon,FolderOpen,FolderClosed} from "lucide-react";
 import { projectsData, filetree } from "@/data/project-data";
 import { motion } from "framer-motion";
@@ -7,6 +7,7 @@ import { motion } from "framer-motion";
 import Challenges from "@/components/projectpage/challenges";
 import Intro from "@/components/projectpage/introduction";
 import { cn } from "@/lib/utils";
+import { useParams, useSearchParams } from "next/navigation";
 
 
 type Tabtyp = {
@@ -27,6 +28,19 @@ const ProjectsPage = () => {
   const [openTabs, setOpenTabs] = useState<Tabtyp[]>([]);
 
   const [fileSelected,setFileSelected]=useState<string>("")
+
+  const searchParams = useSearchParams()
+  const id = searchParams.get("id")||"-1";
+  const project_name =searchParams.get("project_name")||"";
+
+  useEffect(()=>{
+    if(id!="-1" && project_name.length>0){
+      setProjectIdOpen(id)
+      setIntroSelected(true)
+      setFileSelected(filetree[0])
+      tabHandler(filetree[0],id,project_name)
+    }
+  },[id,searchParams])
 
   const setTabInFocus = (tab_id: string) => {
     const tab = openTabs.find((tab) => tab.tab_id == tab_id);
