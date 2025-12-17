@@ -185,7 +185,6 @@ const ProjectsPage = () => {
                 <span className="truncate">{tab.path_to_display}</span>
                 <span
                   onClick={(e) => tabCloser(String(tab.tab_id), e)}
-                  className="ml-2 p-0.5 rounded-full hover:bg-muted/50 opacity-0 group-hover:opacity-100 transition-opacity"
                 >
                   <X size={12} />
                 </span>
