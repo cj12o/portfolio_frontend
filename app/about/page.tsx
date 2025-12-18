@@ -7,6 +7,7 @@ import { Subheading } from "@/components/subheading";
 import Image from "next/image";
 import { achievments as Achievments } from "@/components/awards&excell";
 import {
+  SiTypescript,
   SiReact,
   SiStreamlit,
   SiNextdotjs,
@@ -30,41 +31,43 @@ import { cn } from "@/lib/utils";
 const regionData = {
   frontend: {
     title: "Frontend",
-    desc: "Crafting pixel-perfect, responsive user interfaces. The land of visual storytelling.",
+    desc: "Making interfaces look good and feel right.",
     level: 3,
     color: "text-blue-400",
   },
   database: {
-    title: "Database",
-    desc: "The core of any web app, boost or tank performance, I understand this and I can handle it pretty well.",
+    title: "Databases",
+    desc: "Designing schemas so apps stay fast, not fragile.",
     level: 3,
-    color: "text-blue-400",
+    color: "text-cyan-400",
   },
   backend: {
     title: "Backend",
-    desc: "I can architect robust logic and scalable APIs.",
+    desc: "Turning ideas into reliable APIs and logic.",
     level: 3,
     color: "text-green-400",
   },
   devops: {
-    title: "DevOps Area",
-    desc: "Working with Git workflows and Docker containerization as part of development.",
+    title: "DevOps",
+    desc: "Shipping code with Git and Docker, learning the rest.",
     level: 1,
     color: "text-orange-400",
   },
   genai: {
-    title: "GenAI Zone",
-    desc: "Building GenAI features using prompt engineering, retrieval-augmented generation (RAG), and basic agent workflows.",
+    title: "GenAI & ML",
+    desc: "I admire classical Ml,combining Prompting, RAG, and agents with it can actually do things in better way.",
     level: 3,
     color: "text-purple-400",
   },
   languages: {
     title: "Languages",
-    desc: "I know you can never achieve perfection in a language, but I have good Python skills and enough JS for frontend.",
-    level: 4,
-    color: "text-purple-400",
+    desc: "Python-first, JavaScript & TypeScript where the web demands it.",
+    level: 3,
+    color: "text-yellow-400",
   },
 };
+
+
 
 export default function About() {
   const [activeRegion, setActiveRegion] = useState<string | null>(null);
@@ -186,9 +189,9 @@ export default function About() {
 
             {/* LANGUAGES REGION */}
             <motion.circle
-              cx="70"
-              cy="250"
-              r="80"
+              cx="60"
+              cy="270"
+              r="100"
               fill={activeRegion=="languages"?"rgba(168, 85, 247, 0.3)":"transparent"}
               stroke={activeRegion=="languages"?"rgba(168, 85, 247, 0.3)":"transparent"}
               strokeWidth="2"
@@ -224,7 +227,7 @@ export default function About() {
           >
             <div className="bg-slate-900/90 backdrop-blur-sm px-3 py-1 rounded-full border border-blue-500/50 mb-4 inline-block shadow-lg">
               <p className="text-[10px] font-bold text-blue-100 tracking-widest uppercase">
-                Frontend Nagar
+                Frontend Valley
               </p>
             </div>
             <div
@@ -296,7 +299,7 @@ export default function About() {
           >
             <div className="bg-slate-900/90 backdrop-blur-sm px-3 py-1 rounded-full border border-purple-500/50 mb-4 inline-block shadow-lg">
               <p className="text-[10px] font-bold text-purple-100 tracking-widest uppercase">
-                Languages
+                Languages Central Town
               </p>
             </div>
             <div
@@ -309,6 +312,10 @@ export default function About() {
               <div className="mr-1 ml-1">
                 <SiPython size={36} color="#3776AB" />
                 <p className="text-xs text-secondary">Python</p>
+              </div>
+              <div className="mr-1 ml-1">
+                <SiTypescript size={36} color="#3776AB" />
+                <p className="text-xs text-secondary">Typescript</p>
               </div>
               <div className="mr-1 ml-1">
                 <SiJavascript size={36} color="#F7DF1E" />
@@ -326,7 +333,7 @@ export default function About() {
           >
             <div className="bg-slate-900/90 backdrop-blur-sm px-3 py-1 rounded-full border border-cyan-500/50 mb-4 inline-block shadow-lg">
               <p className="text-[10px] font-bold text-cyan-100 tracking-widest uppercase">
-                Databases
+                Database District
               </p>
             </div>
             <div
@@ -356,7 +363,7 @@ export default function About() {
           >
             <div className="bg-slate-900/90 backdrop-blur-sm px-3 py-1 rounded-full border border-orange-500/50 mb-4 inline-block shadow-lg">
               <p className="text-[10px] font-bold text-orange-100 tracking-widest uppercase">
-                DevOps Area
+                DevOps Docks
               </p>
             </div>
             <div
@@ -386,7 +393,7 @@ export default function About() {
           >
             <div className="bg-slate-900/90 backdrop-blur-sm px-3 py-1 rounded-full border border-purple-500/50 mb-4 inline-block shadow-lg">
               <p className="text-[10px] font-bold text-purple-100 tracking-widest uppercase">
-                GenAI Zone
+                GenAI & ML Arena
               </p>
             </div>
             <div

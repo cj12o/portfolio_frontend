@@ -9,6 +9,7 @@ import {
   SiCelery,
   SiLangchain,
   SiStreamlit,
+  SiMongodb,
 } from "react-icons/si";
 import { cn } from "@/lib/utils";
 import Image  from "next/image";
@@ -31,7 +32,9 @@ export const getTechIcon = ({techname,sz,className}:{techname:string, sz?: numbe
       return <SiReact size={size} className={cn("text-black",className?className:"")}/>;
     case "postgresql":
       return <SiPostgresql size={size} className={cn("text-black",className?className:"")}/>;
-    case "tailwindcss":
+    case "mongodb":
+      return <SiMongodb size={size} className={cn("text-black",className?className:"")}/>
+      case "tailwindcss":
       return <SiTailwindcss size={size} className={cn("text-black",className?className:"")} />;
     case "docker":
       return <SiDocker size={size} className={cn("text-black",className?className:"")}/>;
@@ -45,6 +48,8 @@ export const getTechIcon = ({techname,sz,className}:{techname:string, sz?: numbe
     case "langgraph":
       return  <Image
       src="/assets/langgraph.png" width={size} height={size}alt="langraph" className={`text-black ${className}`?className:""}/>
+    case "streamlit":
+      return <SiStreamlit size={size} className={cn("text-black",className?className:"")} />;
     default:
       return null;
   }

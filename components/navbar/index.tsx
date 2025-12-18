@@ -76,7 +76,7 @@ const index = () => {
                     className="h-full w-full absolute inset-0 rounded-md bg-neutral-300"
                   />
                 ) : null}
-                <span className={on==items[items.length-1].name?"relative z-10 border-b-2 border-black ":"relative z-10"}>{items[items.length-1].name}</span>
+                <span className={on==items[items.length-1].name?"relative z-10  dark:border-white dark:border-b-2 border-b-2 border-black ":"relative z-10"}>{items[items.length-1].name}</span>
               </Link>
             )
           }
@@ -93,10 +93,27 @@ const index = () => {
                 {hover == item.name ? (
                   <motion.span
                     layoutId="hovered-span"
-                    className="h-full w-full absolute inset-0 rounded-md bg-neutral-300"
+                    className="h-full w-full inset-0 z-10 absolute inset-0 rounded-md dark:bg-neutral-300 bg-neutral-300 "
                   />
                 ) : null}
-                <span className={on==item.name?"relative z-10 border-b-2 border-black ":"relative z-10"}>{item.name}</span>
+                {
+                  hover==item.name && on!=item.name ?<span className={"relative z-10 text-black dark:text-black"}>{item.name}</span>:null
+                }
+                {
+                  hover!=item.name && on==item.name ?(
+                    <span className={"relative z-10 text-black border-b-2 dark:border-white dark:text-white"}>{item.name}</span>
+                  ):null
+                }
+                {
+                  on!=item.name && hover!=item.name?(
+                    <span className={"relative z-10 text-black dark:text-white"}>{item.name}</span>
+                  ):null
+                }
+                {
+                  hover==item.name && on==item.name ?(
+                    <span className={"relative z-10 text-black border-b-2 bg-neutral-300 dark:border-black dark:text-dark"}>{item.name}</span>
+                  ):null
+                }
               </Link>
             );
           })}

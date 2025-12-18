@@ -1,3 +1,5 @@
+import { title } from "process";
+
 type Project = {
   id: string;
   techstack:{
@@ -82,7 +84,7 @@ const projectsData: Project[] = [
     database: ["MongoDB"],
     other:[]
   },
-  title: "Personal AI Chatbot",
+  title: "Personal RAG Chatbot",
   description:
     "A production-ready personal AI chatbot designed to explore real-world GenAI system design. The project focuses on async pipelines, retrieval-augmented generation (RAG), session-based memory, and real-time token streaming to deliver fast, contextual, and scalable conversational AI experiences.",
    videoUrl: "/demovids/chatbot_demo_vid.webm",
@@ -198,6 +200,24 @@ const projectsData: Project[] = [
 
 const filetree=["Intro.md","Challenges.tsx","Architecture Diagrams.md"]
 
-export {projectsData,filetree}
+
+const project_tech_front=[
+  {
+    id:"1",
+    title:"Agentic Chatrooms",
+    tech:["React","Django","DjangoRestFramework","Langgraph","Postgresql"],
+  },
+  {
+    project_id:"2",
+    title:"Personal RAG Chatbot",
+    tech:["Streamlit","FastAPI","LangChain", "ChromaDB", "Ollama", "MongoDB"]
+  },
+]
+
+
+
+export {projectsData,filetree,project_tech_front}
+
+
 
 

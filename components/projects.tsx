@@ -1,11 +1,11 @@
 "use client";
 import React from "react";
 import { motion } from "framer-motion";
-import { projectsData } from "@/data/project-data";
+import { project_tech_front } from "@/data/project-data";
 import { Sectionheading } from "./sectionheading";
 import { Heading } from "./heading";
 import { SiChatbot ,SiOpenai} from "react-icons/si";
-import { ArrowRight, Code2, Database} from "lucide-react";
+import { ArrowRight, Code2} from "lucide-react";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { getTechIcon as GetTechIcon } from "./getIcons";
@@ -26,7 +26,7 @@ const getTheme = (title: string) => {
       color: "text-emerald-600 dark:text-emerald-400",
       bg: "bg-emerald-50 dark:bg-white",
       gradient:
-        "from-emerald-500 via-white to-white/75 dark:from-emerald-500 dark:to-neutral-300",
+        "from-emerald-500 via-white to-neutral-400 dark:from-emerald-500 dark:to-neutral-300",
       border: "hover:border-emerald-400 dark:hover:border-emerald-900",
     };
   return {
@@ -39,22 +39,10 @@ const getTheme = (title: string) => {
   };
 };
 
-const getTechTags = (techstack: any): string[] => {
-  if (Array.isArray(techstack)) {
-    return techstack.slice(0, 4);
-  }
-  const tags: string[] = [];
-  if (techstack?.frontend) tags.push(...techstack.frontend);
-  if (techstack?.backend) tags.push(...techstack.backend);
-  if (techstack?.other) tags.push(...techstack.other);
-  if (techstack?.database) tags.push(...techstack.database);
-  return tags.slice(0, 4);
-};
 
 const ProjectCard = ({ project, index }: { project: any; index: number }) => {
-  const tags = getTechTags(project.techstack);
   const theme = getTheme(project.title);
-
+  
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -93,7 +81,7 @@ const ProjectCard = ({ project, index }: { project: any; index: number }) => {
             {project.title}
           </h3>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-          {tags.slice(0, 4).map((tg) => {
+          {project.tech.map((tg:any) => {
             const icon = GetTechIcon({ techname: tg, sz: 18 });
 
             return (
@@ -114,7 +102,7 @@ const ProjectCard = ({ project, index }: { project: any; index: number }) => {
               </>
             );
           })}
-          <div>...</div>
+          <div className="text-sm font-medium text-neutral-200 dark:text-black">... others</div>
         </div>
 
         
@@ -138,10 +126,11 @@ const ProjectCard = ({ project, index }: { project: any; index: number }) => {
 };
 
 const Projects = () => {
+  let counter=0
   return (
     <div className="py-20 w-full">
       <div className="mb-12">
-        <Heading>Selected Projects</Heading>
+        <Heading>Projects</Heading>
         <Sectionheading delay={0.2}>
           I’m interested in how systems behave at scale: real-time
           communication, data flows, and intelligent agents. Most of my projects
@@ -150,7 +139,7 @@ const Projects = () => {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {projectsData.slice(0, 3).map((prj, idx) => (
+        {project_tech_front.map((prj, idx) => (
           <ProjectCard key={prj.id} project={prj} index={idx} />
         ))}
       </div>
