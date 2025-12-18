@@ -1,5 +1,6 @@
 import React from "react";
 import { projectsData } from "@/data/project-data";
+import { Heading } from "../heading";
 
 const Challenges = ({ project_id }: { project_id: string }) => {
   const prj = projectsData[Number(project_id) - 1];
@@ -7,11 +8,11 @@ const Challenges = ({ project_id }: { project_id: string }) => {
   if (!prj) return null;
 
   return (
-    <section className="max-w-4xl mx-auto px-2 py-2">
+    <section className=" mx-auto px-2 py-2 bg-white/75">
       {/* Title */}
-      <h1 className="text-2xl md:text-3xl font-bold tracking-tight mb-6 border-gray-300 border-dotted border-b-2">
+        <h1 className="text-3xl font-medium bg-clip-text underline dark:text-black ">
         {prj.title} -
-        <span className=" ml-3 text-lg font-medium text-muted-foreground mt-1">
+        <span className=" ml-3 text-lg font-medium text-muted-foreground mt-2">
           Key Challenges & Solutions
         </span>
       </h1>
@@ -23,7 +24,7 @@ const Challenges = ({ project_id }: { project_id: string }) => {
             key={idx}
             className="bg-background m-2 p-3"
           >
-            <h3 className="text-md font-semibold mb-2">
+            <h3 className="text-md font-semibold mb-2 dark:text-black">
               # {chl.problem}
             </h3>
 

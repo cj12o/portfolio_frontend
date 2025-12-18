@@ -1,138 +1,3 @@
-// // "use client";
-// import React, { useEffect, useState } from "react";
-// import { ChevronRight, FileCode, X ,SidebarCloseIcon,SidebarOpenIcon,FolderOpen,FolderClosed} from "lucide-react";
-// import { projectsData, filetree } from "@/data/project-data";
-// import { motion } from "framer-motion";
-
-// import Challenges from "@/components/projectpage/challenges";
-// import Intro from "@/components/projectpage/introduction";
-// import { cn } from "@/lib/utils";
-// import { useSearchParams } from "next/navigation";
-// import Image from "next/image";
-
-// type Tabtyp = {
-//   project_id: string;
-//   file_name: string;
-//   openedCurrently: boolean;
-//   tab_id?: string;
-//   path_to_display: string;
-// };
-
-// const ProjectsExplorer = () => {
-//   const [sidebarOpen, setSidebarOpen] = useState<boolean>(true);
-//   const [projectIdOpen, setProjectIdOpen] = useState<string>("-1");
-
-//   const [introSelected, setIntroSelected] = useState<boolean>(false);
-//   const [challengeSelected, setChallengeSelected] = useState<boolean>(false);
-
-//   const [openTabs, setOpenTabs] = useState<Tabtyp[]>([]);
-
-//   const [fileSelected,setFileSelected]=useState<string>("")
-
-//   const searchParams = useSearchParams()
-//   const id = searchParams.get("id")||"-1";
-//   const project_name =searchParams.get("project_name")||"";
-
-//   useEffect(()=>{
-//     if(id!="-1" && project_name.length>0){
-//       setProjectIdOpen(id)
-//       setIntroSelected(true)
-//       setFileSelected(filetree[0])
-//       tabHandler(filetree[0],id,project_name)
-//     }
-//   },[id,searchParams])
-
-//   const setTabInFocus = (tab_id: string) => {
-//     const tab = openTabs.find((tab) => tab.tab_id == tab_id);
-//     if (tab && tab.file_name) {
-//       setOpenTabs((prev) =>
-//         prev.map((t) => ({
-//           ...t,
-//           openedCurrently: t.tab_id === tab_id,
-//         }))
-//       );
-
-//       if (tab.file_name === "Intro.md") {
-//         setIntroSelected(true);
-//         setChallengeSelected(false);
-//       } else if (tab.file_name === "Challenges.tsx") {
-//         setChallengeSelected(true);
-//         setIntroSelected(false);
-//       }
-//       // Ensure the project ID is set so the content renders
-//       setProjectIdOpen(tab.project_id);
-//     }
-//   };
-
-//   const tabCloser = (tab_id: string, e: React.MouseEvent) => {
-//     e.stopPropagation();
-//     const tabToClose = openTabs.find((t) => t.tab_id === tab_id);
-//     const remainingTabs = openTabs.filter((tab) => tab.tab_id != tab_id);
-//     setOpenTabs(remainingTabs);
-
-//     // If closing the active tab, switch to the last one or clear selection
-//     if (tabToClose?.openedCurrently) {
-//       if (remainingTabs.length > 0) {
-//         const lastTab = remainingTabs[remainingTabs.length - 1];
-//         setTabInFocus(lastTab.tab_id!);
-//       } else {
-//         setIntroSelected(false);
-//         setChallengeSelected(false);
-//       }
-//     }
-//   };
-
-//   const tabHandler = (
-//     file_name: string,
-//     project_id: string,
-//     project_name: string
-//   ) => {
-//     const tab_id = file_name + project_id;
-
-//     // Update tabs list
-//     setOpenTabs((prev) => {
-//       const exists = prev.some((tab) => tab.tab_id === tab_id);
-//       if (exists) {
-//         // Just focus it
-//         return prev.map((t) => ({
-//           ...t,
-//           openedCurrently: t.tab_id === tab_id,
-//         }));
-//       }
-//       // Add new and focus
-//       const newTab = {
-//         file_name: file_name,
-//         project_id: project_id,
-//         openedCurrently: true,
-//         tab_id: tab_id,
-//         path_to_display: `${project_name}/${file_name}`,
-//       };
-//       return [...prev.map((t) => ({ ...t, openedCurrently: false })), newTab];
-//     });
-
-//     // Set View State
-//     if (file_name == "Intro.md") {
-//       setIntroSelected(true);
-//       setChallengeSelected(false);
-//     } else if (file_name == "Challenges.tsx") {
-//       setChallengeSelected(true);
-//       setIntroSelected(false);
-//     } else {
-//       setChallengeSelected(false);
-//       setIntroSelected(false);
-//     }
-//   };
-
-//   return (
-//     <div className="py-10 max-w-7xl mx-auto w-full px-4 mt-12  w-full h-full">
-      
-//     </div>
-//   );
-// };
-
-// export default ProjectsExplorer;
-
-
 "use client";
 import React, { useEffect, useState } from "react";
 import { ChevronRight, FileCode, X ,SidebarCloseIcon,SidebarOpenIcon,FolderOpen,FolderClosed} from "lucide-react";
@@ -158,7 +23,7 @@ type Tabtyp = {
 const ProjectsExplorer = () => {
 
   const {theme}=useTheme()
-  let img_src="/assets/wallpaper_2.jpg"
+  let img_src="/assets/wallpaper_dark_3.jpg"
   let sidebar_bg="bg-white/60"
   if(theme=="dark"){
     img_src="/assets/wallpaper_dark_2.jpg"
@@ -405,7 +270,7 @@ const ProjectsExplorer = () => {
                         {filetree.map((fl) => (
                           <div
                             key={fl}
-                            className={cn("flex items-center px-4 py-1 text-sm text-muted-foreground hover:text-foreground cursor-pointer hover:bg-accent/30 rounded-r-sm",fileSelected === fl ? "bg-neutral-100 rounded-xl" : "")}                          
+                            className={cn("flex items-center px-4 py-1 text-sm text-muted-foreground hover:text-foreground cursor-pointer hover:bg-accent/30  rounded-r-sm",fileSelected === fl ? "bg-neutral-100 rounded-xl dark:text-black" : "")}                          
                             onClick={() =>{
                               tabHandler(fl, prj.id, prj.title)
                               setFileSelected(fl)

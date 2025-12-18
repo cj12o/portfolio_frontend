@@ -4,38 +4,30 @@ import { motion } from "framer-motion";
 import { projectsData } from "@/data/project-data";
 import { Sectionheading } from "./sectionheading";
 import { Heading } from "./heading";
-import { SiChatbot } from "react-icons/si";
-import { ArrowRight, Code2, Database, Server } from "lucide-react";
+import { SiChatbot ,SiOpenai} from "react-icons/si";
+import { ArrowRight, Code2, Database} from "lucide-react";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
+import { getTechIcon as GetTechIcon } from "./getIcons";
 
 const getTheme = (title: string) => {
   if (title.includes("Chatrooms") || title.includes("Agent"))
     return {
       icon: <SiChatbot size={24} />,
       color: "text-blue-600 dark:text-blue-400",
-      bg: "bg-blue-50 dark:bg-blue-900/20",
+      bg: "bg-blue-50 dark:bg-white",
       gradient:
-        "from-blue-50/50 via-white to-white dark:from-blue-900/20 dark:via-neutral-900 dark:to-neutral-900",
+        "from-blue-500 via-white to-neutral-400 dark:from-blue-500 dark:to-neutral-300",
       border: "hover:border-blue-400 dark:hover:border-blue-800",
     };
-  if (title.includes("Data"))
+  if (title.includes("Chatbot"))
     return {
-      icon: <Database size={24} />,
+      icon: <SiOpenai size={24} />,
       color: "text-emerald-600 dark:text-emerald-400",
-      bg: "bg-emerald-50 dark:bg-emerald-900/20",
+      bg: "bg-emerald-50 dark:bg-white",
       gradient:
-        "from-emerald-50/50 via-white to-white dark:from-emerald-900/20 dark:via-neutral-900 dark:to-neutral-900",
-      border: "hover:border-emerald-400 dark:hover:border-emerald-800",
-    };
-  if (title.includes("Infra"))
-    return {
-      icon: <Server size={24} />,
-      color: "text-orange-600 dark:text-orange-400",
-      bg: "bg-orange-50 dark:bg-orange-900/20",
-      gradient:
-        "from-orange-50/50 via-white to-white dark:from-orange-900/20 dark:via-neutral-900 dark:to-neutral-900",
-      border: "hover:border-orange-400 dark:hover:border-orange-800",
+        "from-emerald-500 via-white to-white/75 dark:from-emerald-500 dark:to-neutral-300",
+      border: "hover:border-emerald-400 dark:hover:border-emerald-900",
     };
   return {
     icon: <Code2 size={24} />,
@@ -78,7 +70,7 @@ const ProjectCard = ({ project, index }: { project: any; index: number }) => {
       {/* Dynamic Gradient Background */}
       <div
         className={cn(
-          "absolute inset-0 bg-gradient-to-br opacity-0 group-hover:opacity-100 transition-opacity duration-500",
+          "absolute inset-0 bg-gradient-to-br opacity-80 group-hover:opacity-100 transition-opacity duration-500",
           theme.gradient
         )}
       />
@@ -97,19 +89,41 @@ const ProjectCard = ({ project, index }: { project: any; index: number }) => {
             </div>
           </div>
 
-          <h3 className="text-xl font-bold text-neutral-900 dark:text-white mb-3">
+          <h3 className="text-xl  font-semibold tracking-tight text-neutral-900 dark:text-neutral-900 mb-3 ">
             {project.title}
           </h3>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          {tags.slice(0, 4).map((tg) => {
+            const icon = GetTechIcon({ techname: tg, sz: 18 });
 
-          <p className="text-neutral-600 dark:text-neutral-400 text-sm leading-relaxed mb-6 line-clamp-3">
-            {project.description}
-          </p>
+            return (
+              <>
+              {icon && <div
+                key={tg}
+                className="flex items-center gap-2 min-h-[28px]"
+              >
+              <span className="flex-shrink-0">
+                {icon}
+              </span>
+            
+                <span className="text-sm font-medium text-neutral-800 dark:text-black">
+                  {tg}
+                </span>
+              </div>
+              }
+              </>
+            );
+          })}
+          <div>...</div>
+        </div>
+
+        
         </div>
 
         <div className="mt-auto">
           <Link
-            href={`/projects?id=${project.id}&project_name=${project.title}`}  //%editing
-            className="inline-flex items-center text-sm font-semibold text-neutral-900 dark:text-white hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+            href={`/projects?id=${project.id}&project_name=${project.title}`}
+            className="inline-flex items-center text-sm font-semibold text-blue-600 dark:text-blue-600 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
           >
             View Details{" "}
             <ArrowRight

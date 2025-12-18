@@ -60,8 +60,10 @@ const TechCategory = ({ label, items }: { label: string; items: string[] }) => {
   if (!items || items.length === 0) return null;
   return (
     <div className="flex p-2">
-      <div className="flex p-1 items-center justify-center bg-neutral-200  rounded-full">
-        <h3 className="text-xs uppercase tracking-wider text-muted-foreground font-semibold text-dark">
+      <div className="flex p-1 items-center justify-center bg-neutral-200  rounded-full border-2 border-b-blue-700">
+        <h3 className="text-xs uppercase tracking-wider text-muted-foreground font-semibold text-black 
+        
+        ">
           {label}
         </h3>
       </div>
@@ -70,10 +72,10 @@ const TechCategory = ({ label, items }: { label: string; items: string[] }) => {
         {items.map((tech) => (
           <div
             key={tech}
-            className="flex items-center gap-2 px-3 py-1.5 hover:bg-secondary/50 transition-all duration-200"
+            className="flex items-center gap-2 px-3 py-1.5"
           >
             {getTechIcon(tech)}
-            <span className="text-xs font-medium text-foreground/90">
+            <span className="text-xs font-medium text-foreground/90 dark:text-black">
               {tech}
             </span>
           </div>
@@ -98,7 +100,7 @@ const Introduction = ({ project_id }: { project_id: string }) => {
           <h1 className="text-3xl font-medium bg-clip-text underline dark:text-black ">
             {prj.title}
           </h1>
-          <p className="text-muted-foreground leading-relaxed text-sm lg:text-base">
+          <p className="text-muted-foreground leading-relaxed text-sm lg:text-base dark:text-black ">
             {prj.description}
           </p>
         </div>
