@@ -1,3 +1,5 @@
+import { icon } from "mermaid/dist/rendering-util/rendering-elements/shapes/icon.js"
+
 export const eduTimeline=[
      {
         organisation:"BIT Mesra",
@@ -14,5 +16,24 @@ export const eduTimeline=[
         domain:"Class XII",
         score:"Percentage : 90%",
         image:'/assets/b.gif'
+    }
+]
+
+
+export const Certificates_achievements=[
+    {
+        type:"certificate",
+        title:"Microsoft Azure Fundamentals (AZ-900)",
+        media:"",
+        icon:"microsoft",
+        description:"",
+        link:"https://learn.microsoft.com/api/credentials/share/en-us/ChitranshJain-9226/28981FB46CE8EEA0?sharingId=76A6A251F6F02281"
+    },
+    {
+        type:"certificate",
+        title:"Gp Birla Scholarsip",
+        media:"",
+        icon:"BitMesra",
+        description:"Achieved 1st rank in my branch and was awarded the G. P. Birla Scholarship for academic excellence."
     }
 ]

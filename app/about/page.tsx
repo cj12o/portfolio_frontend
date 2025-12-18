@@ -5,6 +5,7 @@ import { Timeline } from "@/components/timeline";
 import { Heading } from "@/components/heading";
 import { Subheading } from "@/components/subheading";
 import Image from "next/image";
+import { achievments as Achievments } from "@/components/awards&excell";
 import {
   SiReact,
   SiStreamlit,
@@ -33,6 +34,12 @@ const regionData = {
     level: 3,
     color: "text-blue-400",
   },
+  database: {
+    title: "Database",
+    desc: "The core of any web app, boost or tank performance, I understand this and I can handle it pretty well.",
+    level: 3,
+    color: "text-blue-400",
+  },
   backend: {
     title: "Backend",
     desc: "I can architect robust logic and scalable APIs.",
@@ -51,6 +58,12 @@ const regionData = {
     level: 3,
     color: "text-purple-400",
   },
+  languages: {
+    title: "Languages",
+    desc: "I know you can never achieve perfection in a language, but I have good Python skills and enough JS for frontend.",
+    level: 4,
+    color: "text-purple-400",
+  },
 };
 
 export default function About() {
@@ -67,22 +80,24 @@ export default function About() {
           make a real impact.
         </Subheading>
         <p className="text-secondary text-sm md:text-base pt-4 max-w-2xl leading-relaxed"></p>
-        Here's my Education Timeline
+
+        <h1 className="mt-3 font-medium text-xl">Education Timeline</h1>
         <div>
           <Timeline />
         </div>
-      
+
+        <h1 className="mt-3 font-medium text-xl">Achievments & Certifications</h1>
+        <div>
+          <Achievments />
+        </div>
 
         {/* INTERACTIVE MAP CONTAINER */}
-        <div className="relative mx-auto mt-16 w-[620px] h-[620px] overflow-hidden bg-white shadow-2xl border border-slate-200
-        dark:var(--shadow-s2)  var(--shadow-s1) rounded-xl
-        ">
+        <div className="relative mx-auto mt-16 w-[620px] h-[620px] overflow-hidden bg-white shadow-2xl border border-slate-200 dark:var(--shadow-s2) var(--shadow-s1) rounded-xl">
           {/* BACKGROUND MAP */}
           <motion.div
             className="absolute inset-0"
-            animate={{ scale: activeRegion ? 1.05 : 1.1 }}
+            animate={{ scale: activeRegion ? 1.05 : 1.2 }}
             transition={{ duration: 0.8 }}
-
           >
             <Image
               src="/assets/map1.png"
@@ -96,8 +111,8 @@ export default function About() {
             <motion.div
               className="absolute inset-0 bg-gradient-to-r from-white via-black/10 to-transparent z-[5] pointer-events-none"
               animate={{ x: ["-100%", "100%"] }}
-              transition={{ duration: 3,ease: "easeInOut" }}
-              viewport={{once:true}}
+              transition={{ duration: 3, ease: "easeInOut" }}
+              viewport={{ once: true }}
             />
           </motion.div>
 
@@ -121,53 +136,77 @@ export default function About() {
             </defs>
 
             {/* FRONTEND - The Jagged Coast */}
-            <motion.path
-              d="M40 80 L60 65 L90 75 L120 40 L160 50 L200 80 L230 140 L210 180 L180 210 L140 230 L100 220 L60 190 L40 140 Z"
-              fill="transparent"
-              className="cursor-pointer"
-              onHoverStart={() => setActiveRegion("frontend")}
-              onHoverEnd={() => setActiveRegion(null)}
-              whileHover={{ scale: 1.02 }}
+            <motion.circle
+              cx="80"
+              cy="100"
+              r="100"
+              fill={activeRegion=="frontend"?"rgba(0,0,255,0.25)":"transparent"}
+              stroke={activeRegion=="frontend"?"rgba(0,0,255,0.25)":"transparent"}
+              className="cursor-pointer hover:stroke-blue-400"
+              onMouseEnter={() => setActiveRegion("frontend")}
+              onMouseLeave={() => setActiveRegion(null)}
             />
 
             {/* BACKEND - The Iron Mountains */}
-            <motion.path
-              d="M280 80 L320 50 L360 70 L420 50 L460 100 L450 160 L420 200 L360 220 L300 200 L270 150 L280 110 Z"
-              fill="transparent"
-              className="cursor-pointer"
-              onHoverStart={() => setActiveRegion("backend")}
-              onHoverEnd={() => setActiveRegion(null)}
-              whileHover={{ scale: 1.02 }}
-            />
-            {/* {languages} */}
-
-            <motion.path
-              d="M280 80 L320 50 L360 70 L420 50 L460 100 L450 160 L420 200 L360 220 L300 200 L270 150 L280 110 Z"
-              fill="transparent"
-              className="cursor-pointer"
-              onHoverStart={() => setActiveRegion("backend")}
-              onHoverEnd={() => setActiveRegion(null)}
-              whileHover={{ scale: 1.02 }}
+            <motion.circle
+              cx="410"
+              cy="120"
+              r="80"
+              fill={activeRegion=="backend"?"rgba(34, 197, 94, 0.3)":"transparent"}
+              stroke={activeRegion=="backend"?"rgba(34, 197, 94, 0.3)":"transparent"}
+              strokeWidth="2"
+              className="cursor-pointer hover:stroke-green-400"
+              onMouseEnter={() => setActiveRegion("backend")}
+              onMouseLeave={() => setActiveRegion(null)}
             />
 
             {/* DEVOPS - The Southern Isles */}
-            <motion.path
-              d="M60 240 L110 210 L160 220 L200 250 L230 320 L200 380 L140 400 L80 370 L50 320 L60 280 Z"
-              fill="transparent"
-              className="cursor-pointer"
-              onHoverStart={() => setActiveRegion("devops")}
-              onHoverEnd={() => setActiveRegion(null)}
-              whileHover={{ scale: 1.02 }}
+            <motion.circle
+              cx="200"
+              cy="320"
+              r="70"
+              fill={activeRegion=="devops"?"rgba(234, 179, 8, 0.3)":"transparent"}
+              stroke={activeRegion=="devops"?"rgba(234, 179, 8, 0.3)":"transparent"}
+              className="cursor-pointer hover:stroke-yellow-400"
+              onMouseEnter={() => setActiveRegion("devops")}
+              onMouseLeave={() => setActiveRegion(null)}
             />
 
             {/* GEN AI - The Mystic Peninsula */}
-            <motion.path
-              d="M300 260 L350 230 L400 250 L440 290 L450 350 L400 390 L340 380 L290 340 L280 290 Z"
-              fill="transparent"
-              className="cursor-pointer"
-              onHoverStart={() => setActiveRegion("genai")}
-              onHoverEnd={() => setActiveRegion(null)}
-              whileHover={{ scale: 1.02 }}
+            <motion.circle
+              cx="400"
+              cy="300"
+              r="100"
+              fill={activeRegion=="genai"?"rgba(168, 85, 247, 0.3)":"transparent"}
+              stroke={activeRegion=="genai"?"rgba(168, 85, 247, 0.3)":"transparent"}
+              className="cursor-pointer hover:stroke-purple-400"
+              onMouseEnter={() => setActiveRegion("genai")}
+              onMouseLeave={() => setActiveRegion(null)}
+            />
+
+            {/* LANGUAGES REGION */}
+            <motion.circle
+              cx="70"
+              cy="250"
+              r="80"
+              fill={activeRegion=="languages"?"rgba(168, 85, 247, 0.3)":"transparent"}
+              stroke={activeRegion=="languages"?"rgba(168, 85, 247, 0.3)":"transparent"}
+              strokeWidth="2"
+              className="cursor-pointer hover:stroke-purple-400"
+              onMouseEnter={() => setActiveRegion("languages")}
+              onMouseLeave={() => setActiveRegion(null)}
+            />
+
+            {/* DATABASE REGION */}
+            <motion.circle
+              cx="260"
+              cy="50"
+              r="80"
+              fill={activeRegion=="database"?"rgba(59, 130, 246, 0.3)":"transparent"}
+              stroke={activeRegion=="database"?"rgba(59, 130, 246, 0.3)":"transparent"}
+              className="cursor-pointer hover:stroke-cyan-400"
+              onMouseEnter={() => setActiveRegion("database")}
+              onMouseLeave={() => setActiveRegion(null)}
             />
           </svg>
 
@@ -175,8 +214,8 @@ export default function About() {
           <div className="absolute right-[100px] top-[250px] z-20 text-center w-[160px] pointer-events-none">
             <p className="text-primary font-bold">TECHSTACK</p>
           </div>
+
           {/* FRONTEND */}
-          
           <motion.div
             className="absolute left-[20px] top-[20px] z-20 text-center w-[160px] pointer-events-none"
             animate={{
@@ -200,7 +239,7 @@ export default function About() {
                 <p className="text-xs text-secondary">React</p>
               </div>
               <div className="mr-1 ml-1">
-                <SiNextdotjs size={36} className="text-black" /> 
+                <SiNextdotjs size={36} className="text-black" />
                 <p className="text-xs text-secondary">Next.js</p>
               </div>
               <div className="mr-1 ml-1">
@@ -226,8 +265,8 @@ export default function About() {
             }}
           >
             <div className="bg-slate-900/90 backdrop-blur-sm px-3 py-1 rounded-full border border-green-500/50 mb-4 inline-block shadow-lg">
-              <p className="text-[10px] font-bold tracking-widest text-green-100 uppercase ">
-                Backend ranges
+              <p className="text-[10px] font-bold tracking-widest text-green-100 uppercase">
+                Backend Ranges
               </p>
             </div>
             <div
@@ -248,20 +287,20 @@ export default function About() {
             </div>
           </motion.div>
 
-          {/* lang */}
+          {/* LANGUAGES */}
           <motion.div
             className="absolute left-[10px] top-[250px] z-20 text-center w-[160px] pointer-events-none"
             animate={{
-              scale: activeRegion === "backend" ? 1.05 : 1,
+              scale: activeRegion === "languages" ? 1.05 : 1,
             }}
           >
-            <div className="bg-slate-900/90 backdrop-blur-sm px-3 py-1 rounded-full border border-green-500/50 mb-4 inline-block shadow-lg">
-              <p className="text-[10px] font-bold text-green-100 tracking-widest uppercase">
-                Languages 
+            <div className="bg-slate-900/90 backdrop-blur-sm px-3 py-1 rounded-full border border-purple-500/50 mb-4 inline-block shadow-lg">
+              <p className="text-[10px] font-bold text-purple-100 tracking-widest uppercase">
+                Languages
               </p>
             </div>
             <div
-              className="grid grid-cols-2 flex gap-6 justify-center flex-wrap p-4"
+              className="grid grid-cols-2 gap-6 justify-center flex-wrap p-4"
               style={{
                 background:
                   "radial-gradient(closest-side, rgba(255,255,255,0.6) 0%, transparent 100%)",
@@ -278,20 +317,20 @@ export default function About() {
             </div>
           </motion.div>
 
-          {/* Databases */}
+          {/* DATABASES */}
           <motion.div
             className="absolute left-[240px] top-0 z-20 text-center w-[160px] pointer-events-none"
             animate={{
-              scale: activeRegion === "backend" ? 1.05 : 1,
+              scale: activeRegion === "database" ? 1.05 : 1,
             }}
           >
-            <div className="bg-slate-900/90 backdrop-blur-sm px-3 py-1 rounded-full border border-green-500/50 mb-4 inline-block shadow-lg">
-              <p className="text-[10px] font-bold text-green-100 tracking-widest uppercase">
+            <div className="bg-slate-900/90 backdrop-blur-sm px-3 py-1 rounded-full border border-cyan-500/50 mb-4 inline-block shadow-lg">
+              <p className="text-[10px] font-bold text-cyan-100 tracking-widest uppercase">
                 Databases
               </p>
             </div>
             <div
-              className="flex gap-6 justify-center flex-wrap p-4 grid grid-cols-2"
+              className="grid grid-cols-2 gap-6 justify-center flex-wrap p-4"
               style={{
                 background:
                   "radial-gradient(closest-side, rgba(255,255,255,0.6) 0%, transparent 100%)",
@@ -299,10 +338,10 @@ export default function About() {
             >
               <div className="mr-1 ml-1">
                 <SiPostgresql size={36} color="#4169E1" />
-                <p className="text-xs text-secondary">PostgreSql</p>
+                <p className="text-xs text-secondary">PostgreSQL</p>
               </div>
               <div className="mr-1 ml-1">
-                <SiMongodb size={36} color="#1dc550ff" />
+                <SiMongodb size={36} color="#1dc550" />
                 <p className="text-xs text-secondary">MongoDB</p>
               </div>
             </div>
@@ -351,7 +390,7 @@ export default function About() {
               </p>
             </div>
             <div
-              className="flex gap-6 justify-center flex-wrap p-4 grid grid-cols-2"
+              className="grid grid-cols-2 gap-6 justify-center flex-wrap p-4"
               style={{
                 background:
                   "radial-gradient(closest-side, rgba(255,255,255,0.6) 0%, transparent 100%)",
@@ -367,15 +406,13 @@ export default function About() {
               </div>
               <div className="mr-1 ml-1">
                 <Image
-                src="/assets/langgraph.png"
-                width={36}
-                height={36}
-                alt="langraph"
-                color="#1C3C3C"
-              />
+                  src="/assets/langgraph.png"
+                  width={50}
+                  height={50}
+                  alt="langraph"
+                />
                 <p className="text-xs text-secondary">Langgraph</p>
               </div>
-              
             </div>
           </motion.div>
 
@@ -392,48 +429,52 @@ export default function About() {
                 >
                   <div className="items-center">XP</div>
                   <div className="w-full md:h-2 flex">
-                    
-                    {
-                      Array.from({ length: 6 }).map((_, idx) => (
-                        <div className={cn("border border-black dark:border-white h-full w-1/5",
-                          regionData[activeRegion as keyof typeof regionData].level>idx?"bg-red-600":"")}>
-                          </div>
-                      ))
-                    }
-                    <div></div>
+                    {Array.from({ length: 5}).map((_, idx) => (
+                      <div
+                        key={idx}
+                        className={cn(
+                          "border border-black dark:border-white h-full w-1/5",
+                          regionData[activeRegion as keyof typeof regionData]
+                            .level > idx
+                            ? "bg-red-600"
+                            : ""
+                        )}
+                      />
+                    ))}
                   </div>
-                  {/* {info} */}
-                  <div className="flex h-2/3">
 
-                  <div className="flex ">
-                    <h3
-                      className={`font-bold mr-2 text-lg uppercase tracking-widest ${regionData[activeRegion as keyof typeof regionData].color}`}
-                    >
-                      {
-                        regionData[activeRegion as keyof typeof regionData]
-                          .title
-                      }
-                    </h3>
-                    <p className="text-xs text-gray-400 mt-1 max-w-[280px]">
-                      {regionData[activeRegion as keyof typeof regionData].desc}
-                    </p>
-                  </div>
+                  <div className="flex h-2/3">
+                    <div className="flex">
+                      <h3
+                        className={`font-bold mr-2 text-lg uppercase tracking-widest ${
+                          regionData[activeRegion as keyof typeof regionData]
+                            .color
+                        }`}
+                      >
+                        {
+                          regionData[activeRegion as keyof typeof regionData]
+                            .title
+                        }
+                      </h3>
+                      <p className="text-xs text-gray-400 mt-1 max-w-[280px]">
+                        {
+                          regionData[activeRegion as keyof typeof regionData]
+                            .desc
+                        }
+                      </p>
+                    </div>
                   </div>
                 </motion.div>
               ) : (
                 <motion.div
                   key="idle"
-                  initial={{ opacity: 0 }}
+                  initial={{ opacity: 0.5 }}
                   animate={{ opacity: 1 }}
                   exit={{ opacity: 0 }}
                   className="w-full text-center"
                 >
-                  <p className="text-sm text-gray-400 font-mono animate-pulse">
-                    &gt; WAITING FOR INPUT...
-                    <br />
-                    <span className="text-xs text-gray-600">
-                      HOVER OVER A REGION TO SCAN
-                    </span>
+                  <p className="text-sm text-gray-400 font-mono text-md animate-pulse">
+                    &gt; Hover Over the region ...
                   </p>
                 </motion.div>
               )}

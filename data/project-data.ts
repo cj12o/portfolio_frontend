@@ -3,7 +3,8 @@ type Project = {
   techstack:{
     frontend:string [],
     backend:string [],
-    containerization?:string [],
+    GenAi:string [],
+    containerization:string [],
     database:string [],
     other:string[]
   },
@@ -26,9 +27,10 @@ const projectsData: Project[] = [
     techstack:{
       frontend:["React","Tailwindcss"],
       backend:["Django","DjangoRestFramework","DjangoChannels","Celery"],
+      GenAi:["Langchain","Langgraph","ChromaDB"],
       containerization:["Docker"],
-      database:["Postgresql"],
-      other:["Langchain","Langgraph"]
+      database:["Postgresql","ChromaDB"],
+      other:["Redis"]
     },
     title: "Agentic Chatrooms",
     description:
@@ -75,8 +77,10 @@ const projectsData: Project[] = [
   techstack: {
     frontend: ["Streamlit"],
     backend: ["FastAPI"],
+    GenAi: ["LangChain", "ChromaDB", "Ollama", "LMStudio"],
+    containerization:[],
     database: ["MongoDB"],
-    other: ["LangChain", "ChromaDB", "Ollama", "LMStudio"]
+    other:[]
   },
   title: "Personal AI Chatbot",
   description:

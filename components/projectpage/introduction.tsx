@@ -130,12 +130,11 @@ const Introduction = ({ project_id }: { project_id: string }) => {
       <div className="">
         <TechCategory label="Frontend" items={prj.techstack.frontend} />
         <TechCategory label="Backend" items={prj.techstack.backend} />
+        <TechCategory label="GenAI" items={prj.techstack.GenAi} />
         <TechCategory label="Database" items={prj.techstack.database} />
-        <TechCategory
-          label="Infrastructure"
-          items={prj.techstack.containerization}
-        />
+        <TechCategory label="Infrastructure" items={prj.techstack.containerization}/>
         <TechCategory label="Other tools" items={prj.techstack.other} />
+        
       </div>
     </div>
   );
