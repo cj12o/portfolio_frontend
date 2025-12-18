@@ -16,12 +16,12 @@ export const NAV_ITEMS = [
     name: "Contact",
     href: "/contact",
   },
-  {
-    name: "Blogs",
-    href: "/blogs",
-  },
+  // {
+  //   name: "Blogs",
+  //   href: "/blogs",
+  // },
   
-];
+];c
 
 
 

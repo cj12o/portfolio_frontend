@@ -29,14 +29,13 @@ const projectsData: Project[] = [
     techstack:{
       frontend:["React","Tailwindcss"],
       backend:["Django","DjangoRestFramework","DjangoChannels","Celery"],
-      GenAi:["Langchain","Langgraph","ChromaDB"],
+      GenAi:["Langchain","Langgraph"],
       containerization:["Docker"],
       database:["Postgresql","ChromaDB"],
       other:["Redis"]
     },
     title: "Agentic Chatrooms",
-    description:
-      "Education is the cornerstone of personal and societal development. It empowers individuals with knowledge, critical thinking skills, and the ability to make amplified the role of education, making lifelong learning essential to adapt to rapid changes. Moreover, education supports innovation and critical analysis, which are vital for solving complex global challenges such as climate change, poverty, and public health crises.",
+    description:"A  real-time chat system that integrates AI agents, background task processing, and WebSocket-based communication. Designed with Django, Celery, Redis, and LangGraph to ensure high concurrency, real-time moderation, and intelligent room recommendations.",
     videoUrl: "/demovids/21-35-51.mp4",
     challenges: [
       {

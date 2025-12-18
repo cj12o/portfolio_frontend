@@ -8,8 +8,7 @@ import {
   SiPostgresql,
   SiTailwindcss,
   SiCelery,
-  SiLangchain
-} from "react-icons/si";
+  SiLangchain,SiRedis,SiStreamlit,SiMongodb,SiOllama} from "react-icons/si";
 import Image from "next/image";
 import { cn } from "@/lib/utils";
 
@@ -22,6 +21,12 @@ const getTechIcon = (techName: string, size: number = 16) => {
       return <SiDjango size={size} className="text-[#44B78B]" />;
     case "react":
       return <SiReact size={size} className="text-[#61DAFB]" />;
+    case "mongodb":
+      return <SiMongodb size={size} className="text-[#47A248]" />;
+    case "streamlit":
+      return <SiStreamlit size={size} className="text-[#FF4B4B]" />;
+    case "ollama":
+      return <SiOllama size={size} className="text-[#000000]" />;
     case "postgresql":
       return <SiPostgresql size={size} className="text-[#336791]" />;
     case "djangorestframework":
@@ -37,6 +42,18 @@ const getTechIcon = (techName: string, size: number = 16) => {
           />
         </div>
       );
+    case "chromadb":
+      return (
+        <div className="relative overflow-hidden rounded-sm">
+          <Image
+            height={size}
+            width={size}
+            src="/assets/chromadb.png"
+            alt="chromDb"
+            className="object-contain"
+          />
+        </div>
+      ); 
     case "tailwindcss":
       return <SiTailwindcss size={size} className="text-[#38B2AC]" />;
     case "docker":
@@ -44,13 +61,15 @@ const getTechIcon = (techName: string, size: number = 16) => {
     case "celery":
       return <SiCelery size={size} className="text-[#37814A]" />;
     case "djangochannels":
-    case "django channels":
       return <SiDjango size={size} className="text-[#44B78B]" />; // Reusing Django icon for channels
     case "langchain":
       return <SiLangchain size={size} className="text-[#FFA500]" />; // Fallback icon for Langchain if package not imported
     case "langgraph":
       return  <Image
       src="/assets/langgraph.png" width={size} height={size}alt="langraph" color="#1C3C3C"/>
+    case "redis":
+      return <SiRedis size={size} color="#FF4438" />; // Fallback icon for Langchain if package not imported
+      
     default:
       return null;
   }
