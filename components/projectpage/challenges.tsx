@@ -8,7 +8,7 @@ const Challenges = ({ project_id }: { project_id: string }) => {
   if (!prj) return null;
 
   return (
-    <section className=" mx-auto px-2 py-2 bg-white/75">
+    <div className="h-full w-full px-2 py-2 bg-white/75 overflow-y-scroll">
       {/* Title */}
         <h1 className="text-3xl font-medium bg-clip-text underline dark:text-black ">
         {prj.title} -
@@ -49,7 +49,7 @@ const Challenges = ({ project_id }: { project_id: string }) => {
           </div>
         ))}
       </div>
-    </section>
+    </div>
   );
 };
 

@@ -207,7 +207,7 @@ const project_tech_front=[
     tech:["React","Django","DjangoRestFramework","Langgraph","Postgresql"],
   },
   {
-    project_id:"2",
+    id:"2",
     title:"Personal RAG Chatbot",
     tech:["Streamlit","FastAPI","LangChain", "ChromaDB", "Ollama", "MongoDB"]
   },

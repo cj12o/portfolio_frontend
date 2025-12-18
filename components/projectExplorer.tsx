@@ -306,26 +306,21 @@ const ProjectsExplorer = () => {
                 ))}
               </div>
             </motion.div>
-
-            {/* Content Area */}
-            <div className={cn("flex-1 bg-background relative overflow-y-auto w-full h-full",( introSelected || challengeSelected? "bg-white/25" : ""))}>
-              <div className="min-h-full">
-                {openTabs.length > 0 && (introSelected || challengeSelected || detailsSelected) ? (
+            <div
+              className={cn(
+                "flex flex-col flex-1 relative overflow-y-auto bg-background",
+                (introSelected || challengeSelected || detailsSelected) && "bg-white/25"
+              )}
+            >
+              <div className="flex-1 min-h-0">
+                {openTabs.length > 0 &&
+                (introSelected || challengeSelected || detailsSelected) ? (
                   <>
-                    {introSelected && projectIdOpen !== "-1" && (
-                      <Intro project_id={projectIdOpen} />
-                    
-                    )}
-                    {challengeSelected && projectIdOpen !== "-1" && (
-                      <Challenges project_id={projectIdOpen} />
-                    )}
-                    {detailsSelected && projectIdOpen !== "-1" && (
-                      <Details project_id={projectIdOpen} />
-                    )}
-                    
-
+                    {introSelected && <Intro project_id={projectIdOpen} />}
+                    {challengeSelected && <Challenges project_id={projectIdOpen} />}
+                    {detailsSelected && <Details project_id={projectIdOpen} />}
                   </>
-                ) : (
+                ) :(
                   <div className="h-full flex flex-col items-center justify-center text-muted-foreground opacity-40 select-none">
                     <div className="w-24 h-24 bg-muted mb-4 rounded-xl flex items-center justify-center">
                       <svg

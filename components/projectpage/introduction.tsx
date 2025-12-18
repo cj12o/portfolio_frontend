@@ -78,7 +78,7 @@ const getTechIcon = (techName: string, size: number = 16) => {
 const TechCategory = ({ label, items }: { label: string; items: string[] }) => {
   if (!items || items.length === 0) return null;
   return (
-    <div className="flex p-2">
+    <div className="flex p-2 ">
       <div className="flex p-1 items-center justify-center bg-neutral-200  rounded-full border-2 border-b-blue-700">
         <h3 className="text-xs uppercase tracking-wider text-muted-foreground font-semibold text-black 
         
@@ -112,7 +112,7 @@ const Introduction = ({ project_id }: { project_id: string }) => {
   const url = prj.videoUrl;
 
   return (
-    <div className="w-full h-full grid grid-cols-1 bg-white/75 pt-5 pl-3">
+    <div className="w-full h-full grid grid-cols-1 bg-white/75 pt-5 pl-3 overflow-y-scroll">
       {/* Content Section */}
       <div className="flex space-y-8">
         <div className="w-1/2 p-5">
