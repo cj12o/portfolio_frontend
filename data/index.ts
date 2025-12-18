@@ -21,7 +21,7 @@ export const NAV_ITEMS = [
   //   href: "/blogs",
   // },
   
-];c
+];
 
 
 
