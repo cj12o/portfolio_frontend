@@ -10,6 +10,7 @@ import { cn } from "@/lib/utils";
 import { useSearchParams } from "next/navigation";
 import Image from "next/image";
 import { useTheme } from "next-themes";
+import Details from "@/components/projectpage/details"
 
 type Tabtyp = {
   project_id: string;
@@ -35,6 +36,7 @@ const ProjectsExplorer = () => {
 
   const [introSelected, setIntroSelected] = useState<boolean>(false);
   const [challengeSelected, setChallengeSelected] = useState<boolean>(false);
+  const [detailsSelected,setDetailsSelected]=useState<boolean>(false);
 
   const [openTabs, setOpenTabs] = useState<Tabtyp[]>([]);
 
@@ -66,9 +68,17 @@ const ProjectsExplorer = () => {
       if (tab.file_name === "Intro.md") {
         setIntroSelected(true);
         setChallengeSelected(false);
-      } else if (tab.file_name === "Challenges.tsx") {
+        setDetailsSelected(false)
+      } 
+      else if (tab.file_name === "Challenges.tsx") {
         setChallengeSelected(true);
         setIntroSelected(false);
+        setDetailsSelected(false)
+      }
+      else if(tab.file_name === "Details.md"){
+        setIntroSelected(false);
+        setChallengeSelected(false);
+        setDetailsSelected(true)
       }
       // Ensure the project ID is set so the content renders
       setProjectIdOpen(tab.project_id);
@@ -89,6 +99,7 @@ const ProjectsExplorer = () => {
       } else {
         setIntroSelected(false);
         setChallengeSelected(false);
+        setDetailsSelected(false);
       }
     }
   };
@@ -116,7 +127,7 @@ const ProjectsExplorer = () => {
         project_id: project_id,
         openedCurrently: true,
         tab_id: tab_id,
-        path_to_display: `${project_name}/${file_name}`,
+        path_to_display: `${project_name.slice(0,5)} / ${file_name}`,
       };
       return [...prev.map((t) => ({ ...t, openedCurrently: false })), newTab];
     });
@@ -125,12 +136,17 @@ const ProjectsExplorer = () => {
     if (file_name == "Intro.md") {
       setIntroSelected(true);
       setChallengeSelected(false);
-    } else if (file_name == "Challenges.tsx") {
+      setDetailsSelected(false)
+    } 
+    else if (file_name == "Challenges.tsx") {
       setChallengeSelected(true);
       setIntroSelected(false);
-    } else {
+      setDetailsSelected(false);
+    }
+    else if(file_name == "Details.md"){
       setChallengeSelected(false);
       setIntroSelected(false);
+      setDetailsSelected(true);
     }
   };
 
@@ -294,7 +310,7 @@ const ProjectsExplorer = () => {
             {/* Content Area */}
             <div className={cn("flex-1 bg-background relative overflow-y-auto w-full h-full",( introSelected || challengeSelected? "bg-white/25" : ""))}>
               <div className="min-h-full">
-                {openTabs.length > 0 && (introSelected || challengeSelected) ? (
+                {openTabs.length > 0 && (introSelected || challengeSelected || detailsSelected) ? (
                   <>
                     {introSelected && projectIdOpen !== "-1" && (
                       <Intro project_id={projectIdOpen} />
@@ -303,6 +319,11 @@ const ProjectsExplorer = () => {
                     {challengeSelected && projectIdOpen !== "-1" && (
                       <Challenges project_id={projectIdOpen} />
                     )}
+                    {detailsSelected && projectIdOpen !== "-1" && (
+                      <Details project_id={projectIdOpen} />
+                    )}
+                    
+
                   </>
                 ) : (
                   <div className="h-full flex flex-col items-center justify-center text-muted-foreground opacity-40 select-none">

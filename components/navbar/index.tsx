@@ -10,6 +10,8 @@ import { redirect } from "next/navigation";
 import {useTheme} from "next-themes";
 import { SunIcon,MoonIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
+
+
 const index = () => {
   
   const{theme,setTheme}=useTheme();
@@ -22,6 +24,8 @@ const index = () => {
   const { scrollY } = useScroll();
 
   const [scrolled, setScrolled] = useState<boolean>(false);
+
+  
 
   const y=useTransform(scrollY,[0,100],[0,10]);
   const width=useTransform(scrollY,[0,100],["100%","60%"])
@@ -60,27 +64,8 @@ const index = () => {
           }}
         />
         <div className="flex items-center gap-3">
-           {
-            on!="Home" && (
-              <Link
-                className="relative text-sm px-2 py-1"
-                onMouseEnter={() => setHover(items[items.length-1].name)}
-                onMouseLeave={() => setHover("")}
-                href={items[items.length-1].href}
-                key={items.length-1}
-                onClick={()=>setOn(items[items.length-1].name)}
-              >
-                {hover == items[items.length-1].name ? (
-                  <motion.span
-                    layoutId="hovered-span"
-                    className="h-full w-full absolute inset-0 rounded-md bg-neutral-300"
-                  />
-                ) : null}
-                <span className={on==items[items.length-1].name?"relative z-10  dark:border-white dark:border-b-2 border-b-2 border-black ":"relative z-10"}>{items[items.length-1].name}</span>
-              </Link>
-            )
-          }
-          {items.slice(0,items.length-1).map((item, idx) => {
+           
+          {items.map((item, idx) => {
             return (
               <Link
                 className="relative text-sm px-2 py-1"

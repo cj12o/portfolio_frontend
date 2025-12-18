@@ -198,7 +198,7 @@ const projectsData: Project[] = [
 }
 ];
 
-const filetree=["Intro.md","Challenges.tsx","Architecture Diagrams.md"]
+const filetree=["Intro.md","Challenges.tsx","Details.md"]
 
 
 const project_tech_front=[
@@ -215,8 +215,23 @@ const project_tech_front=[
 ]
 
 
+const project_details=[
+  {
+    id:"1",
+    title:"Agentic Chatrooms",
+    Linkedin:"https://www.linkedin.com/posts/chitransh-jain-71bbb3336_agentic-chat-rooms-over-the-last-few-weeks-activity-7402819040320413696-LHbh?utm_source=share&utm_medium=member_desktop&rcm=ACoAAFSJ90cBsaH33v0UDNWe7NolkeGOYPTcSN8",
+    Github:"https://github.com/cj12o/Chatroom",
+  },
+  {
+    id:"2",
+    title:"Personal RAG Chatbot",
+    Linkedin:"https://www.linkedin.com/posts/chitransh-jain-71bbb3336_built-my-personal-ai-chatbot-with-session-activity-7344761221859966976-T7nq?utm_source=share&utm_medium=member_desktop&rcm=ACoAAFSJ90cBsaH33v0UDNWe7NolkeGOYPTcSN8",
+    Github:"https://github.com/cj12o/Langchain-chatbot",
 
-export {projectsData,filetree,project_tech_front}
+  }
+]
+
+export {projectsData,filetree,project_tech_front,project_details}
 
 
 

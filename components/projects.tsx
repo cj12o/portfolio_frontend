@@ -102,7 +102,7 @@ const ProjectCard = ({ project, index }: { project: any; index: number }) => {
               </>
             );
           })}
-          <div className="text-sm font-medium text-neutral-200 dark:text-black">... others</div>
+          <div className="text-sm font-medium  dark:text-black text-black">... others</div>
         </div>
 
         

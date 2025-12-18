@@ -8,8 +8,7 @@ import { Sectionheading } from "@/components/sectionheading";
 import { SiGithub,SiGmail,SiLinkedin } from "react-icons/si";
 import Link from "next/link";
 import { useState } from "react";
-import { Send, SendIcon } from "lucide-react";
-import axios from "axios";
+import { SendIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 
