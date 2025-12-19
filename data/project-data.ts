@@ -36,7 +36,7 @@ const projectsData: Project[] = [
     },
     title: "Agentic Chatrooms",
     description:"A  real-time chat system that integrates AI agents, background task processing, and WebSocket-based communication. Designed with Django, Celery, Redis, and LangGraph to ensure high concurrency, real-time moderation, and intelligent room recommendations.",
-    videoUrl: "/demovids/agentic_chatrooms.mp4"
+    videoUrl: "/demovids/agentic_chatrooms.mp4",
     challenges: [
       {
         problem: "Most chat rooms start strong… and then gradually go silent.",
