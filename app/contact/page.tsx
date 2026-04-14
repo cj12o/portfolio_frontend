@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 import { SOCIAL_LINKS } from "@/data";
 import { Heading } from "@/components/heading";
 import { Sectionheading } from "@/components/sectionheading";
-import { SiGithub,SiGmail, } from "react-icons/si";
+import { SiGithub,SiGmail, SiLeetcode} from "react-icons/si";
 import { FaLinkedin } from "react-icons/fa";
 import { useState } from "react";
 import { SendIcon, FileDown } from "lucide-react";
@@ -22,6 +22,8 @@ const getIcons=(name:string):React.ReactNode|null=>{
       return <FaLinkedin size={size} color="#0A66C2" />
     case "github":
       return <SiGithub  size={size} className="text-#181717 dark:text-white"/>
+    case "leetcode":
+      return <SiLeetcode  size={size} className="text-#181717 dark:text-white"/>
     default:
       return null
   }  

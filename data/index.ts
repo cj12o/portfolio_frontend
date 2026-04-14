@@ -38,4 +38,8 @@ export const SOCIAL_LINKS = [
     name: "LinkedIn",
     href: "https://www.linkedin.com/in/chitransh-jain-71bbb3336/",
   },
+  {
+    name: "LeetCode",
+    href: "https://leetcode.com/u/ch_208/",
+  }
 ];
