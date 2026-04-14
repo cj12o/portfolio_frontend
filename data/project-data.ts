@@ -74,7 +74,67 @@ const projectsData: Project[] = [
     
   },
   {
-  id: "2",
+    id: "2",
+    techstack: {
+      frontend: ["React", "Vite", "Tailwindcss", "shadcn/ui"],
+      backend: ["FastAPI"],
+      GenAi: ["OpenAI GPT-4o", "text-embedding-3-large", "Qdrant"],
+      containerization: ["Docker"],
+      database: ["PostgreSQL", "Qdrant"],
+      other: ["AWS S3", "AWS"]
+    },
+    title: "InterviewInsight",
+    description:
+      "A full-stack AI-powered recruitment platform where hiring managers upload job descriptions and candidate resumes/transcripts. The system parses JDs into structured parameters, ranks resumes with ATS-style weighted scoring, extracts and embeds interview Q&A into a vector store, then generates per-skill scores, weakness summaries, and personalised learning plans via LLM pipelines.",
+    challenges: [
+      {
+        problem: "JDs vary wildly in format — extracting consistent, comparable skill tags across different roles was unreliable with naive prompting.",
+        solution: "Designed a GPT-4o structured-output schema (JdStructuredOutput) that forces the model to emit 4–10 concise, domain-agnostic derived_tags alongside YOE, experience level, and responsibilities.",
+        technicalchallenge: "Derived tags had to be stable enough to serve as filter keys in Qdrant retrieval downstream — inconsistent casing or verbosity broke metadata filtering.",
+        chlsolution: `
+          Constrained the LLM output to lowercase, short labels
+          Used pydantic-settings strict validation on the response
+          Tags became the shared vocabulary across all three AI pipelines
+        `,
+        achieved: "🎯 Consistent, reusable tags that power every downstream scoring and retrieval step."
+      },
+      {
+        problem: "Interview transcripts can exceed 40k characters — sending them whole to GPT-4o hits context limits and inflates cost.",
+        solution: "Applied RecursiveCharacterTextSplitter (chunk_size=30k, overlap=2k) before Q/A extraction, then embedded each pair with text-embedding-3-large and stored them in Qdrant with tag metadata.",
+        technicalchallenge: "Maintaining referential integrity: old Q/A rows in Postgres and stale Qdrant points had to be purged before re-ingestion to prevent score contamination.",
+        chlsolution: `
+          Atomic clear-then-insert: delete Postgres rows and Qdrant points before upserting
+          Each Q/A pair stored with qdrant_point_id for deterministic cleanup
+          Chunking overlap preserves context across split boundaries
+        `,
+        achieved: "📄 Reliable re-ingestion with no stale vectors polluting retrieval."
+      },
+      {
+        problem: "Resume sections (Education, Experience, Skills, Projects) carry different signal strength — treating all chunks equally produced noisy ATS scores.",
+        solution: "Built a regex-based section splitter with alias normalisation, then applied weighted cosine similarity: skills=0.4, experience=0.3, projects=0.2, education=0.1.",
+        technicalchallenge: "Section headers vary enormously ('Work History', 'Professional Experience', 'Employment') — a fixed regex would silently drop sections.",
+        chlsolution: `
+          Alias normalisation map collapses variants to canonical section names
+          Large sections re-chunked at 500 chars to avoid diluting embeddings
+          Missing sections default to zero weight rather than crashing the pipeline
+        `,
+        achieved: "📊 ATS scores that reflect real hiring signal, not just keyword density."
+      },
+      {
+        problem: "All four AI pipelines (JD analysis, transcript Q/A, scoring, resume ranking) are compute-heavy — blocking FastAPI would time out the client.",
+        solution: "Every pipeline is queued with FastAPI BackgroundTasks and runs fully async; the endpoint returns immediately with a 202 while work proceeds in the background.",
+        technicalchallenge: "Background tasks cannot share the request-scoped SQLAlchemy session — they need their own DB connection lifecycle.",
+        chlsolution: `
+          Background services call get_session() directly and open their own AsyncSession blocks
+          All DB and S3 I/O uses async drivers (asyncpg, aiobotocore)
+          Status field on ScoreReport/ResumeRank lets the frontend poll for completion
+        `,
+        achieved: "⚡ Non-blocking pipelines that scale without freezing the API."
+      }
+    ]
+  },
+  {
+  id: "3",
   techstack: {
     frontend: ["Streamlit"],
     backend: ["FastAPI"],
@@ -204,12 +264,26 @@ const project_tech_front=[
   {
     id:"1",
     title:"Agentic Chatrooms",
-    tech:["React","Django","DjangoRestFramework","Langgraph","Postgresql"],
+    image:"/assets/Chatroom_img.png",
+    tech:["React","Django","DjangoRestFramework","Langgraph","Postgresql","Aws","Docker","Celery","ChromaDB","Redis","ChromaDb"],
+    description:"When conversations die, communities fade. Agentic Chatroom autonomously maintains engagement using scheduled AI-driven prompts, polls, and context-aware interactions.",
+    siteUrl:`${process.env.NEXT_PUBLIC_BASE_URL_CHATROOMS}`,
   },
   {
     id:"2",
+    title:"InterviewInsight",
+    image:"/assets/interview_insight_img.png",
+    tech:["React","FastAPI","PostgreSQL","Qdrant","AWS","OpenAI GPT-4o","Docker"],
+    description:"Upload a JD and candidate resumes or transcripts — InterviewInsight parses skills, ranks resumes with weighted ATS scoring, extracts and embeds interview Q&A, then generates per-skill scores, weakness breakdowns, and personalised learning plans.",
+    siteUrl:`${process.env.NEXT_PUBLIC_BASE_URL_INTERVIEWINSIGHT}`,
+  },
+  {
+    id:"3",
     title:"Personal RAG Chatbot",
-    tech:["Streamlit","FastAPI","LangChain", "ChromaDB", "Ollama", "MongoDB"]
+    image:"/assets/rag_chatbot_img.png",
+    tech:["Streamlit","FastAPI","LangChain", "ChromaDB", "Ollama", "MongoDB"],
+    description:"en",
+    siteUrl:"",
   },
 ]
 
@@ -223,10 +297,15 @@ const project_details=[
   },
   {
     id:"2",
+    title:"InterviewInsight",
+    Linkedin:"",
+    Github:"https://github.com/cj12o/InterviewInsight",
+  },
+  {
+    id:"3",
     title:"Personal RAG Chatbot",
     Linkedin:"https://www.linkedin.com/posts/chitransh-jain-71bbb3336_built-my-personal-ai-chatbot-with-session-activity-7344761221859966976-T7nq?utm_source=share&utm_medium=member_desktop&rcm=ACoAAFSJ90cBsaH33v0UDNWe7NolkeGOYPTcSN8",
     Github:"https://github.com/cj12o/Langchain-chatbot",
-
   }
 ]
 

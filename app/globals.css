@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Playwrite+IE:wght@100..400&display=swap');
 @import "tailwindcss";
 @import "tw-animate-css";
 
@@ -11,6 +12,7 @@
   --card: 0 0% 100%;
   --border: 214 32% 91%;          /* slate-200 */
   --muted: 210 40% 96%;           /* slate-100 */
+  --font-inter: "Inter", sans-serif;
 }
 
 .dark {

@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import { Inter,Space_Grotesk } from "next/font/google";
+import { Inter, Space_Grotesk, Playwrite_IE ,Bungee_Shade} from "next/font/google";
 import Navbar from "@/components/navbar/index";
 import { ViewTransition } from "react";
 import { Footer } from "@/components/navbar/footer";
@@ -11,12 +11,23 @@ import "highlight.js/styles/github-dark.css";
 const inter = Inter({
   weight: ["400", "500", "600", "700", "800", "900"],
   subsets: ["latin"],
+  variable: "--font-inter",
 });
 
 
 const space = Space_Grotesk({
   subsets: ["latin"],
   variable: "--font-space",
+});
+
+const playwrite = Playwrite_IE({
+  variable: "--font-playwrite",
+});
+
+const bungee = Bungee_Shade({
+  weight: "400",
+  subsets: ["latin"],
+  variable: "--font-bungee",
 });
 
 
@@ -35,7 +46,7 @@ export default function RootLayout({
     <html lang="en">
       
       <body
-        className={`${inter.className} ${space.className}antialiased bg-neutral-100 [--pattern-fg:var(--color-gray-950)]/5 `}
+        className={`${inter.className} ${space.className} ${playwrite.variable} ${bungee.variable} antialiased bg-neutral-100 [--pattern-fg:var(--color-gray-950)]/5 `}
       >
         <ThemeProvider
         attribute="class"

@@ -10,46 +10,54 @@ import {
   SiLangchain,
   SiStreamlit,
   SiMongodb,
+  SiRedis,
+  SiAmazonwebservices,
+  SiOllama,
 } from "react-icons/si";
 import { cn } from "@/lib/utils";
-import Image  from "next/image";
+import Image from "next/image";
 
-export const getTechIcon = ({techname,sz,className}:{techname:string, sz?: number,className?:string}) => {
+export const getTechIcon = ({ techname, sz, className }: { techname: string; sz?: number; className?: string }) => {
   const size = sz || 16;
-  const tech = techname.toLowerCase();
+  const tech = techname.toLowerCase().replace(/\s/g, "");
+  const cls = className || "";
+
   switch (tech) {
     case "bitmesra":
-      return <Image src={"/assets/bitMesra.png"} alt={"bitmesra"} height={size} width={size} className={cn("text-black rounded-full",className?className:"")}/>
+      return <Image src={"/assets/bitMesra.png"} alt={"bitmesra"} height={size} width={size} className={cn("rounded-full", cls)} />;
     case "microsoft":
-      return <Image src={"/assets/microsoft.png"} alt={"Microsoft"} height={size} width={size} className={cn("text-black",className?className:"")}/>
-    case "sreamlit":
-      return <SiStreamlit size={size} className={cn("text-black",className?className:"")}/>;
+      return <Image src={"/assets/microsoft.png"} alt={"Microsoft"} height={size} width={size} className={cls} />;
     case "fastapi":
-      return <SiFastapi size={size} className={cn("text-black",className?className:"")}/>;
+      return <SiFastapi size={size} className={cls} />;
     case "django":
-      return <SiDjango size={size} className={cn("text-black",className?className:"")}/>;
-    case "react":
-      return <SiReact size={size} className={cn("text-black",className?className:"")}/>;
-    case "postgresql":
-      return <SiPostgresql size={size} className={cn("text-black",className?className:"")}/>;
-    case "mongodb":
-      return <SiMongodb size={size} className={cn("text-black",className?className:"")}/>
-      case "tailwindcss":
-      return <SiTailwindcss size={size} className={cn("text-black",className?className:"")} />;
-    case "docker":
-      return <SiDocker size={size} className={cn("text-black",className?className:"")}/>;
-    case "celery":
-      return <SiCelery size={size} className={cn("text-black",className?className:"")} />;
+    case "djangorestframework":
     case "djangochannels":
-    case "django channels":
-      return <SiDjango size={size} className={cn("text-black",className?className:"")} />; // Reusing Django icon for channels
+      return <SiDjango size={size} className={cls} />;
+    case "react":
+      return <SiReact size={size} className={cls} />;
+    case "postgresql":
+      return <SiPostgresql size={size} className={cls} />;
+    case "mongodb":
+      return <SiMongodb size={size} className={cls} />;
+    case "tailwindcss":
+      return <SiTailwindcss size={size} className={cls} />;
+    case "docker":
+      return <SiDocker size={size} className={cls} />;
+    case "celery":
+      return <SiCelery size={size} className={cls} />;
     case "langchain":
-      return <SiLangchain size={size} className={cn("text-black",className?className:"")}  />; // Fallback icon for Langchain if package not imported
+      return <SiLangchain size={size} className={cls} />;
     case "langgraph":
-      return  <Image
-      src="/assets/langgraph.png" width={size} height={size}alt="langraph" className={`text-black ${className}`?className:""}/>
+      return <Image src="/assets/langgraph.png" width={size} height={size} alt="langgraph" className={cls} />;
     case "streamlit":
-      return <SiStreamlit size={size} className={cn("text-black",className?className:"")} />;
+      return <SiStreamlit size={size} className={cls} />;
+    case "redis":
+      return <SiRedis size={size} className={cls} />;
+    case "aws":
+    case "amazonwebservices":
+      return <SiAmazonwebservices size={size} className={cls} />;
+    case "ollama":
+      return <SiOllama size={size} className={cls} />;
     default:
       return null;
   }

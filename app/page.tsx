@@ -9,6 +9,7 @@ import MotionWrapper from "@/components/motionwrapper";
 import { LocationEdit } from "lucide-react";
 import { motion } from "framer-motion";
 
+
 export function TypingText({
   text,
   delay = 0,

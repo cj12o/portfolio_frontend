@@ -4,45 +4,64 @@ import { motion } from "framer-motion";
 import { project_tech_front } from "@/data/project-data";
 import { Sectionheading } from "./sectionheading";
 import { Heading } from "./heading";
-import { SiChatbot ,SiOpenai} from "react-icons/si";
-import { ArrowRight, Code2} from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { getTechIcon as GetTechIcon } from "./getIcons";
+import Image from "next/image";
 
-const getTheme = (title: string) => {
-  if (title.includes("Chatrooms") || title.includes("Agent"))
-    return {
-      icon: <SiChatbot size={24} />,
-      color: "text-blue-600 dark:text-blue-400",
-      bg: "bg-blue-50 dark:bg-white",
-      gradient:
-        "from-blue-500 via-white to-neutral-400 dark:from-blue-500 dark:to-neutral-300",
-      border: "hover:border-blue-400 dark:hover:border-blue-800",
-    };
-  if (title.includes("Chatbot"))
-    return {
-      icon: <SiOpenai size={24} />,
-      color: "text-emerald-600 dark:text-emerald-400",
-      bg: "bg-emerald-50 dark:bg-white",
-      gradient:
-        "from-emerald-500 via-white to-neutral-400 dark:from-emerald-500 dark:to-neutral-300",
-      border: "hover:border-emerald-400 dark:hover:border-emerald-900",
-    };
-  return {
-    icon: <Code2 size={24} />,
-    color: "text-neutral-600 dark:text-neutral-400",
-    bg: "bg-neutral-50 dark:bg-neutral-900/20",
-    gradient:
-      "from-neutral-50/50 via-white to-white dark:from-neutral-900/20 dark:via-neutral-900 dark:to-neutral-900",
-    border: "hover:border-neutral-200 dark:hover:border-neutral-800",
-  };
+
+// Brand colors per tech
+const techMeta: Record<string, { icon: string; pill: string }> = {
+  react:                { icon: "text-cyan-400",                pill: "bg-cyan-500/10 border-cyan-500/20 text-cyan-600 dark:text-cyan-400" },
+  django:               { icon: "text-green-600 dark:text-green-400", pill: "bg-green-500/10 border-green-500/20 text-green-700 dark:text-green-400" },
+  djangorestframework:  { icon: "text-green-600 dark:text-green-400", pill: "bg-green-500/10 border-green-500/20 text-green-700 dark:text-green-400" },
+  djangochannels:       { icon: "text-green-600 dark:text-green-400", pill: "bg-green-500/10 border-green-500/20 text-green-700 dark:text-green-400" },
+  docker:               { icon: "text-blue-500",                pill: "bg-blue-500/10 border-blue-500/20 text-blue-600 dark:text-blue-400" },
+  postgresql:           { icon: "text-blue-700 dark:text-blue-400", pill: "bg-blue-700/10 border-blue-700/20 text-blue-800 dark:text-blue-400" },
+  tailwindcss:          { icon: "text-cyan-500",                pill: "bg-cyan-500/10 border-cyan-500/20 text-cyan-600 dark:text-cyan-400" },
+  celery:               { icon: "text-green-500",               pill: "bg-green-500/10 border-green-500/20 text-green-600 dark:text-green-400" },
+  langchain:            { icon: "text-purple-500",              pill: "bg-purple-500/10 border-purple-500/20 text-purple-600 dark:text-purple-400" },
+  langgraph:            { icon: "",                             pill: "bg-purple-600/10 border-purple-600/20 text-purple-700 dark:text-purple-400" },
+  streamlit:            { icon: "text-red-500",                 pill: "bg-red-500/10 border-red-500/20 text-red-600 dark:text-red-400" },
+  mongodb:              { icon: "text-green-500",               pill: "bg-green-500/10 border-green-500/20 text-green-600 dark:text-green-400" },
+  fastapi:              { icon: "text-teal-500",                pill: "bg-teal-500/10 border-teal-500/20 text-teal-600 dark:text-teal-400" },
+  redis:                { icon: "text-red-600",                 pill: "bg-red-600/10 border-red-600/20 text-red-700 dark:text-red-500" },
+  chromadb:             { icon: "text-orange-500",              pill: "bg-orange-500/10 border-orange-500/20 text-orange-600 dark:text-orange-400" },
+  ollama:               { icon: "text-neutral-600 dark:text-neutral-300", pill: "bg-neutral-500/10 border-neutral-500/20 text-neutral-700 dark:text-neutral-300" },
+  aws:                  { icon: "text-orange-500",              pill: "bg-orange-500/10 border-orange-500/20 text-orange-600 dark:text-orange-400" },
+  lmstudio:             { icon: "text-indigo-500",              pill: "bg-indigo-500/10 border-indigo-500/20 text-indigo-600 dark:text-indigo-400" },
 };
 
+const DEFAULT_META = { icon: "text-neutral-500", pill: "bg-neutral-500/10 border-neutral-500/20 text-neutral-600 dark:text-neutral-400" };
+
+const TechPill = ({ tech }: { tech: string }) => {
+  const key = tech.toLowerCase().replace(/\s/g, "");
+  const meta = techMeta[key] || DEFAULT_META;
+  const icon = GetTechIcon({ techname: tech, sz: 12, className: meta.icon });
+
+  return (
+    <span
+      className={cn(
+        "inline-flex items-center gap-1.5 px-2 py-0.5 rounded border text-[10px] font-medium tracking-wide whitespace-nowrap",
+        meta.pill
+      )}
+    >
+      {icon && <span className="shrink-0 flex items-center">{icon}</span>}
+      {tech}
+    </span>
+  );
+};
 
 const ProjectCard = ({ project, index }: { project: any; index: number }) => {
-  const theme = getTheme(project.title);
-  
+  // Deduplicate tech (case-insensitive)
+  const seen = new Set<string>();
+  const uniqueTech: string[] = [];
+  for (const t of project.tech as string[]) {
+    const k = t.toLowerCase();
+    if (!seen.has(k)) { seen.add(k); uniqueTech.push(t); }
+  }
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -50,75 +69,56 @@ const ProjectCard = ({ project, index }: { project: any; index: number }) => {
       transition={{ duration: 0.5, delay: index * 0.1 }}
       viewport={{ once: true }}
       className={cn(
-        "group relative flex flex-col justify-between p-6 rounded-3xl bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 transition-all duration-300 transform hover:-translate-y-1 cursor-default overflow-hidden",
-        "hover:shadow-xl hover:shadow-black/5 dark:hover:shadow-white/5",
-        theme.border
+        "group rounded-lg bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 overflow-hidden transition-all duration-300 hover:-translate-y-1",
+        "hover:shadow-xl hover:shadow-black/5 dark:hover:shadow-white/5 flex flex-col h-full shrink-0"
       )}
     >
-      {/* Dynamic Gradient Background */}
-      <div
-        className={cn(
-          "absolute inset-0 bg-gradient-to-br opacity-80 group-hover:opacity-100 transition-opacity duration-500",
-          theme.gradient
-        )}
-      />
+      {/* IMAGE */}
+      <div className="relative w-full aspect-video overflow-hidden bg-neutral-100 dark:bg-neutral-800 shrink-0">
+        <Image
+          src={project.image}
+          alt="project"
+          fill={true}
+          className="transition-transform duration-500 group-hover:scale-105 object-contain"
+        />
+        <div className="absolute inset-0 transparent" />
+      </div>
 
-      <div className="relative z-10 flex flex-col h-full">
-        <div>
-          <div className="flex justify-between items-start mb-6">
-            <div
-              className={cn(
-                "h-12 w-12 rounded-2xl flex items-center justify-center shadow-sm transition-colors duration-300",
-                theme.bg,
-                theme.color
-              )}
-            >
-              {theme.icon}
-            </div>
-          </div>
+      {/* CONTENT */}
+      <div className="p-5 flex flex-col gap-3 flex-1">
+      <h3 className="text-xl w-fit p-1 text-neutral-900 dark:text-white" style={{ fontFamily: "var(--inter)",fontWeight:"800"}}>
+  {project.title}
+</h3>
+        <p className="text-xs text-neutral-500 dark:text-neutral-400 line-clamp-2 leading-relaxed">
+          {project.description}
+        </p>
 
-          <h3 className="text-xl  font-semibold tracking-tight text-neutral-900 dark:text-neutral-900 mb-3 ">
-            {project.title}
-          </h3>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-          {project.tech.map((tg:any) => {
-            const icon = GetTechIcon({ techname: tg, sz: 18 });
-
-            return (
-              <>
-              {icon && <div
-                key={tg}
-                className="flex items-center gap-2 min-h-[28px]"
-              >
-              <span className="flex-shrink-0">
-                {icon}
-              </span>
-            
-                <span className="text-sm font-medium text-neutral-800 dark:text-black">
-                  {tg}
-                </span>
-              </div>
-              }
-              </>
-            );
-          })}
-          <div className="text-sm font-medium  dark:text-black text-black">... others</div>
+        {/* TECH STACK PILLS */}
+        <div className="flex flex-wrap gap-1.5 pt-1">
+          {uniqueTech.map((tg) => (
+            <TechPill key={tg} tech={tg} />
+          ))}
         </div>
 
-        
-        </div>
-
-        <div className="mt-auto">
+        {/* CTA */}
+        <div className="mt-auto pt-3 border-t border-neutral-100 dark:border-neutral-800 mx-auto">
           <Link
             href={`/projects?id=${project.id}&project_name=${project.title}`}
-            className="inline-flex items-center text-sm font-semibold text-blue-600 dark:text-blue-600 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+            className="inline-flex items-center gap-1 text-xs font-semibold text-blue-600 dark:text-blue-400 hover:text-blue-500 transition-colors"
           >
-            View Details{" "}
-            <ArrowRight
-              size={16}
-              className="ml-1 group-hover:translate-x-1 transition-transform"
-            />
+            View Details
+            <ArrowRight size={13} className="transition-transform group-hover:translate-x-0.5" />
           </Link>
+
+          
+          {project.siteUrl && <Link
+            href={project.siteUrl}
+            className="inline-flex items-center gap-1 text-xs font-semibold text-blue-600 dark:text-blue-400 hover:text-blue-500 transition-colors ml-5"
+          >
+            Visit
+            <ArrowRight size={13} className="transition-transform group-hover:translate-x-0.5" />
+          </Link>
+          }
         </div>
       </div>
     </motion.div>
@@ -126,11 +126,10 @@ const ProjectCard = ({ project, index }: { project: any; index: number }) => {
 };
 
 const Projects = () => {
-  let counter=0
   return (
-    <div className="py-20 w-full">
+    <div className="py-20 w-full flex flex-col">
       <div className="mb-12">
-        <Heading>Projects</Heading>
+        <Heading className="font-[family-name:var(--font-bungee)]">Projects</Heading>
         <Sectionheading delay={0.2}>
           I’m interested in how systems behave at scale: real-time
           communication, data flows, and intelligent agents. Most of my projects
@@ -138,7 +137,7 @@ const Projects = () => {
         </Sectionheading>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 w-full">
         {project_tech_front.map((prj, idx) => (
           <ProjectCard key={prj.id} project={prj} index={idx} />
         ))}

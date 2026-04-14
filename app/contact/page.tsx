@@ -10,6 +10,7 @@ import Link from "next/link";
 import { useState } from "react";
 import { SendIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { sendEmail } from "@/backend/email";
 
 
 const getIcons=(name:string):React.ReactNode|null=>{
@@ -39,33 +40,10 @@ export default function Contact() {
   const [name,setName]=useState("")
   const [popUp,setPopUp]=useState<PopUps|null>(null)
   
-  const ept = async () => {
-  try {
-    const formData = new FormData();
-    formData.append("name", name);
-    formData.append("email", email);
-    formData.append("message", message);
-
-    await fetch(
-      String(process.env.URL),
-      {
-        method: "POST",
-        body: formData,
-      }
-    );
-
-    setPopUp({ success: true, message: "Message Sent Successfully!" });
-    setName("");
-    setEmail("");
-    setMessage("");
-  } catch (err) {
-    setPopUp({
-      success: false,
-      message: "Error in sending message, please try again",
-    });
+  const handleSubmit=async()=>{
+    const response=await sendEmail({email,message,name});
+    setPopUp(response?.message);
   }
-};
-
 
   return (
     <div className="min-h-screen flex items-start justify-start dark:bg-bgdark">
@@ -120,7 +98,7 @@ export default function Contact() {
             <form className="space-y-4"
               onSubmit={(e)=>{
                 e.preventDefault()
-                ept()
+                handleSubmit()
               }}>
               <div>
                 <label
