@@ -23,7 +23,9 @@ import {
   SiScikitlearn,
   SiTailwindcss,
   SiHtml5,
+  SiGithubactions,
 } from "react-icons/si";
+import { FaAws } from "react-icons/fa";
 
 import { motion, AnimatePresence } from "framer-motion";
 import { cn } from "@/lib/utils";
@@ -49,9 +51,15 @@ const regionData = {
   },
   devops: {
     title: "DevOps",
-    desc: "Shipping code with Git and Docker, learning the rest.",
-    level: 1,
+    desc: "Shipping code with Git, Docker, and GitHub Actions.",
+    level: 3,
     color: "text-orange-400",
+  },
+  cloud: {
+    title: "Cloud",
+    desc: "AWS — deploying apps on cloud  via Docker and GitHub Actions.",
+    level: 3,
+    color: "text-sky-400",
   },
   genai: {
     title: "GenAI & ML",
@@ -209,6 +217,18 @@ export default function About() {
               stroke={activeRegion=="database"?"rgba(59, 130, 246, 0.3)":"transparent"}
               className="cursor-pointer hover:stroke-cyan-400"
               onMouseEnter={() => setActiveRegion("database")}
+              onMouseLeave={() => setActiveRegion(null)}
+            />
+
+            {/* CLOUD REGION */}
+            <motion.circle
+              cx="300"
+              cy="350"
+              r="60"
+              fill={activeRegion=="cloud"?"rgba(14, 165, 233, 0.3)":"transparent"}
+              stroke={activeRegion=="cloud"?"rgba(14, 165, 233, 0.3)":"transparent"}
+              className="cursor-pointer hover:stroke-sky-400"
+              onMouseEnter={() => setActiveRegion("cloud")}
               onMouseLeave={() => setActiveRegion(null)}
             />
           </svg>
@@ -381,6 +401,10 @@ export default function About() {
                 <SiDocker size={36} className="text-[#2496ED]" />
                 <p className="text-xs text-secondary">Docker</p>
               </div>
+              <div className="mr-1 ml-1">
+                <SiGithubactions size={36} className="text-[#2088FF]" />
+                <p className="text-xs text-secondary">GH Actions</p>
+              </div>
             </div>
           </motion.div>
 
@@ -419,6 +443,32 @@ export default function About() {
                   alt="langraph"
                 />
                 <p className="text-xs text-secondary">Langgraph</p>
+              </div>
+            </div>
+          </motion.div>
+
+          {/* CLOUD */}
+          <motion.div
+            className="absolute left-74 bottom-30 z-20 text-center w-30 pointer-events-none"
+            animate={{
+              scale: activeRegion === "cloud" ? 1.05 : 1,
+            }}
+          >
+            <div className="bg-slate-900/90 backdrop-blur-sm px-3 py-1 rounded-full border border-sky-500/50 mb-4 inline-block shadow-lg">
+              <p className="text-[10px] font-bold text-sky-100 tracking-widest uppercase">
+                Cloud Skies
+              </p>
+            </div>
+            <div
+              className="flex gap-4 justify-center flex-wrap p-4"
+              style={{
+                background:
+                  "radial-gradient(closest-side, rgba(255,255,255,0.6) 0%, transparent 100%)",
+              }}
+            >
+              <div className="mr-1 ml-1">
+                <FaAws size={36} className="text-[#FF9900]" />
+                <p className="text-xs text-secondary">AWS</p>
               </div>
             </div>
           </motion.div>
