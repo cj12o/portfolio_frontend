@@ -5,8 +5,8 @@ import { motion } from "framer-motion";
 import { SOCIAL_LINKS } from "@/data";
 import { Heading } from "@/components/heading";
 import { Sectionheading } from "@/components/sectionheading";
-import { SiGithub,SiGmail,SiLinkedin } from "react-icons/si";
-import Link from "next/link";
+import { SiGithub,SiGmail, } from "react-icons/si";
+import { FaLinkedin } from "react-icons/fa";
 import { useState } from "react";
 import { SendIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -19,7 +19,7 @@ const getIcons=(name:string):React.ReactNode|null=>{
     case "gmail":
       return <SiGmail color="#EA4335" size={size} />
     case "linkedin":
-      return <SiLinkedin size={size} color="#0D597F" />
+      return <FaLinkedin size={size} color="#0A66C2" />
     case "github":
       return <SiGithub  size={size} className="text-#181717 dark:text-white"/>
     default:
@@ -84,7 +84,7 @@ export default function Contact() {
                   <span className="text-sm text-secondary group-hover:text-primary transition-colors">
                     {getIcons(link.name)}
                   </span>
-                  <Link href={link.href}>{link.name}</Link>
+                  <span className="text-sm">{link.name}</span>
                 </motion.a>
               ))}
             </div>

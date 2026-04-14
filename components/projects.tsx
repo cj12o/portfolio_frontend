@@ -1,5 +1,4 @@
 "use client";
-import React from "react";
 import { motion } from "framer-motion";
 import { project_tech_front } from "@/data/project-data";
 import { Sectionheading } from "./sectionheading";
@@ -79,6 +78,7 @@ const ProjectCard = ({ project, index }: { project: any; index: number }) => {
           src={project.image}
           alt="project"
           fill={true}
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           className="transition-transform duration-500 group-hover:scale-105 object-contain"
         />
         <div className="absolute inset-0 transparent" />

@@ -1,6 +1,6 @@
 "use client";
 import Container from "@/components/container";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { motion, useMotionValueEvent, useScroll, useTransform } from "framer-motion";
@@ -15,6 +15,8 @@ import { cn } from "@/lib/utils";
 const index = () => {
   
   const{theme,setTheme}=useTheme();
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => { setMounted(true); }, []);
 
   const items = NAV_ITEMS;
 
@@ -52,10 +54,11 @@ const index = () => {
       >
         <Image
           className="h-10 w-10 rounded-full"
-          src="/neymar.jpg"
-          height={100}
-          width={100}
+          src="/assets/ghibli_2.png"
+          height={200}
+          width={200}
           alt="avatar"
+          priority
           onClick={()=>{
             setHover("")
             setOn("Home")
@@ -107,7 +110,7 @@ const index = () => {
             theme==="dark"?setTheme("light"):setTheme("dark")
           }}
           >
-          {theme == "dark" ? <SunIcon/>:<MoonIcon/>}
+          {mounted && (theme == "dark" ? <SunIcon/>:<MoonIcon/>)}
         </button>
         </div>
       </motion.nav>

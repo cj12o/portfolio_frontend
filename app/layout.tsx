@@ -4,7 +4,7 @@ import { Inter, Space_Grotesk, Playwrite_IE ,Bungee_Shade} from "next/font/googl
 import Navbar from "@/components/navbar/index";
 import { ViewTransition } from "react";
 import { Footer } from "@/components/navbar/footer";
-import { ThemeProvider } from "next-themes";
+import { Providers } from "@/components/providers";
 import "highlight.js/styles/github-dark.css";
 
 
@@ -43,20 +43,16 @@ export default function RootLayout({
 }>) {
   return (
     <ViewTransition>
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       
       <body
         className={`${inter.className} ${space.className} ${playwrite.variable} ${bungee.variable} antialiased bg-neutral-100 [--pattern-fg:var(--color-gray-950)]/5 `}
       >
-        <ThemeProvider
-        attribute="class"
-        defaultTheme="system"
-        enableSystem
-        >
+        <Providers>
             <Navbar />
             {children}
             <Footer/>
-        </ThemeProvider>
+        </Providers>
       </body>
     </html>
     </ViewTransition>

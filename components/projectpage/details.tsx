@@ -1,7 +1,8 @@
 import React from 'react'
 import { project_details } from "@/data/project-data";
 
-import { SiGithub,SiLinkedin} from 'react-icons/si';
+import { SiGithub} from 'react-icons/si';
+import { FaLinkedin } from 'react-icons/fa';
 import Link from 'next/link';
 import { Subheading } from '../subheading';
 
@@ -9,7 +10,7 @@ const GetIcons=({name}:{name:string}):React.ReactNode|null=>{
   const size=30
   switch(name.toLocaleLowerCase()){
     case "linkedin":
-      return <SiLinkedin size={size} color="#0D597F" />
+      return <FaLinkedin size={size} color="#0D597F" />
     case "github":
       return <SiGithub  size={size} className="text-#181717 dark:text-white"/>
     default:

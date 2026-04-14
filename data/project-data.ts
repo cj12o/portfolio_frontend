@@ -282,7 +282,7 @@ const project_tech_front=[
     title:"Personal RAG Chatbot",
     image:"/assets/rag_chatbot_img.png",
     tech:["Streamlit","FastAPI","LangChain", "ChromaDB", "Ollama", "MongoDB"],
-    description:"en",
+    description:"A production-ready personal AI chatbot with RAG, session-based memory, and real-time token streaming — built to explore async GenAI system design using LangChain, FastAPI, ChromaDB, and MongoDB.",
     siteUrl:"",
   },
 ]
