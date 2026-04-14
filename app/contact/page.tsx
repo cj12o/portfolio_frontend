@@ -8,7 +8,7 @@ import { Sectionheading } from "@/components/sectionheading";
 import { SiGithub,SiGmail, } from "react-icons/si";
 import { FaLinkedin } from "react-icons/fa";
 import { useState } from "react";
-import { SendIcon } from "lucide-react";
+import { SendIcon, FileDown } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { sendEmail } from "@/backend/email";
 
@@ -88,6 +88,17 @@ export default function Contact() {
                 </motion.a>
               ))}
             </div>
+
+            <a
+              href="/assets/resume.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              download
+              className="inline-flex items-center gap-2 mt-6 px-5 py-2.5 text-sm font-medium rounded-md border border-neutral-300 dark:border-white/20 text-primary dark:text-white hover:bg-neutral-100 dark:hover:bg-white/10 transition-colors"
+            >
+              <FileDown size={16} />
+              Download Resume
+            </a>
           </div>
 
           {/* Simple Form (Optional, keeping it minimal) */}
