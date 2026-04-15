@@ -10,7 +10,7 @@ import { FaLinkedin } from "react-icons/fa";
 import { useState } from "react";
 import { SendIcon, FileDown } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { sendEmail } from "@/backend/email";
+import { sendEmail } from "@/app/actions/sendEmail";
 
 
 const getIcons=(name:string):React.ReactNode|null=>{
@@ -43,8 +43,8 @@ export default function Contact() {
   const [popUp,setPopUp]=useState<PopUps|null>(null)
   
   const handleSubmit=async()=>{
-    const response=await sendEmail({email,message,name});
-    setPopUp(response?.message);
+    await sendEmail({ email, message, name });
+    setPopUp({success:true,message:"Email Sent Successfully!"})
   }
 
   return (
