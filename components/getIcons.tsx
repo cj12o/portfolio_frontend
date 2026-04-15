@@ -11,9 +11,9 @@ import {
   SiStreamlit,
   SiMongodb,
   SiRedis,
-  // SiAmazonwebservices,
   SiOllama,
 } from "react-icons/si";
+import { FaAws} from "react-icons/fa";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
 
@@ -55,7 +55,7 @@ export const getTechIcon = ({ techname, sz, className }: { techname: string; sz?
       return <SiRedis size={size} className={cls} />;
     case "aws":
     case "amazonwebservices":
-      return <SiCelery size={size} className={cls} />;
+      return <FaAws size={size} className={cls} />;
     case "ollama":
       return <SiOllama size={size} className={cls} />;
     default:
